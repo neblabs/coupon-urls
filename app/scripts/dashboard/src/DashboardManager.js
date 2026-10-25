@@ -19,8 +19,24 @@ class DashboardManager {
         this.noMainPathValidator,
     ]
 
-    constructor(store) {
+    /**
+     * @param {Object} store
+     * @param {Object|boolean} [options={ fullCanvas: false }] - Flag or options object
+     */
+    constructor(store, options = {}) {
         this.store = store
+
+        // Supports passing { fullCanvas: true }, a boolean true/false, or reading from features.fullCanvas
+        if (typeof options === 'boolean') {
+            this.options = { fullCanvas: options }
+        } else {
+            this.options = options || {}
+        }
+
+        this.isFullCanvas = Boolean(
+            this.options.fullCanvas ?? features?.fullCanvas ?? false
+        )
+
         this.createElements()
         this.createDashboardOpenCloseEvent()
         this.createSaveEvents()
@@ -35,6 +51,11 @@ class DashboardManager {
             this.state.isOpen = true;
             $(this.getMainElement()).removeClass('hidden')
             this.getClassicPanelContentElement().css('display', 'none')
+
+            // Hide Woo's new header in full-canvas mode so it doesn't take up space
+            if (this.isFullCanvas) {
+                this.getWooHeaderElement().css('display', 'none')
+            }
         }
     }
 
@@ -63,50 +84,30 @@ class DashboardManager {
         return contentElement
     }
 
-    getSwitchToClassicButtonElement() 
+    getWooHeaderElement() 
     {
-        const getElement = () => document.getElementById('cu-view-switch-to-classic')
+        const headerElement = $('.woocommerce-layout__header, .woocommerce-layout__header-wrapper');
 
-        let element = getElement()
-
-        if (!element) {
-
-            this.getHeadingRoot().prepend(`
-                <button id="cu-view-switch-to-classic" class="hidden flex flex-row items-center space-x-2 px-5 ml-[calc(var(--large-gap)*-1)] h-full border-r-px border-gray-200 mr-4">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
-                    </svg>
-                    <span>
-                        ${__('Back', textDomain)}
-                    </span>
-                </button>
-            `) 
+        if (typeof this.wooHeaderElementOriginalDisplayValue === 'undefined' && headerElement.length) {
+            this.wooHeaderElementOriginalDisplayValue = headerElement.css('display')
         }
 
-        return getElement()
+        return headerElement
     }
 
-    getSaveButtonElement() 
+    getContainerElement() 
     {
-        const getElement = () => document.getElementById('cu-save')
-
-        let element = getElement()
-
-        if (!element) {
-
-            this.getHeadingRoot().addClass('relative');
-
-            this.getHeadingRoot().append(`
-                <button id="cu-save" class="cu-save absolute right-2 top-1/2 -translate-y-1/2 flex flex-row space-x-2 leading-5 items-center ml-6 h-9 px-3 rounded-3 bg-blue-normal ring-blue-shade-200 text-gray-100 capitalize font-light ring-[4px]">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14M5 12a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v4a2 2 0 01-2 2M5 12a2 2 0 00-2 2v4a2 2 0 002 2h14a2 2 0 002-2v-4a2 2 0 00-2-2m-2-4h.01M17 16h.01"></path>
-                    </svg>
-                    <span>${__('Save', textDomain)}</span>
-                </button>
-            `) 
+        // When full canvas is enabled, attach directly to #wpcontent (the WP canvas)
+        if (this.isFullCanvas) {
+            const wpcontent = $('#wpcontent');
+            if (wpcontent.length) {
+                wpcontent.css('position', 'relative');
+                return wpcontent;
+            }
         }
 
-        return getElement()
+        // Leave default rendering untouched
+        return $('#wpbody-content');
     }
 
     addDashboardButtons() 
@@ -140,25 +141,30 @@ class DashboardManager {
         const urlParams = new URLSearchParams(window.location.search);
         const openedByDefault = urlParams.get('coupon-urls-opened') === 'true';
 
-        $('#wpbody-content').append(`<div id="coupon_urls" class="${openedByDefault || 'hidden'} left-0 top-0 z-[1000] w-full relative bg-gray-200"><div>`)
+        const fullCanvasClass = this.isFullCanvas ? 'coupon_urls--full-canvas' : '';
+        const targetContainer = this.getContainerElement();
+
+        targetContainer.append(`<div id="coupon_urls" class="${openedByDefault || 'hidden'} ${fullCanvasClass} left-0 top-0 z-[1000] w-full relative bg-gray-200"><div>`)
 
         const form = document.querySelector('form#post')
 
-        const fields = [
-            'coupon_urls_state',
-            'coupon_urls_dashboard_nonce'
-        ]
+        if (form) {
+            const fields = [
+                'coupon_urls_state',
+                'coupon_urls_dashboard_nonce'
+            ]
 
-        fields.forEach(field => {
-            const fieldElement = document.createElement('input')
+            fields.forEach(field => {
+                const fieldElement = document.createElement('input')
 
-            fieldElement.type = 'hidden'
-            fieldElement.id = field
-            fieldElement.name = field
-            
-            form.append(fieldElement)
-            this.fieldElements[field] = fieldElement
-        });
+                fieldElement.type = 'hidden'
+                fieldElement.id = field
+                fieldElement.name = field
+
+                form.append(fieldElement)
+                this.fieldElements[field] = fieldElement
+            });
+        }
     }
 
     createDashboardOpenCloseEvent() 
@@ -167,20 +173,15 @@ class DashboardManager {
             event.preventDefault()
             this.open()
         })
-
-        $('body').on('click', '.woocommerce-layout__header-heading--coupons-plus #cu-view-switch-to-classic', () => {
-            this.close()
-        })
-
-        $('body').on('click', '.woocommerce-layout__header-heading--coupons-plus #cu-save', (event) => {
-            const labelElement = $(event.target).is('span')? $(event.target) : $(event.target).find('span')
-            labelElement.html(__('Saving...', textDomain))
-            $('#publish').click();
-        })
     }
 
     createSaveEvents() {
-        document.querySelector('#publish.button').addEventListener('click', (event) => {
+        const publishButton = document.querySelector('#publish.button');
+        if (!publishButton) {
+            return;
+        }
+
+        publishButton.addEventListener('click', (event) => {
             this.beforeSaveEvents
                 .map(runner => runner.bind(this, event))
                 .forEach(runner => runner())
@@ -197,16 +198,15 @@ class DashboardManager {
 
     beforeOpen() 
     {
-        features.buttons.backButton && this.getSwitchToClassicButtonElement().classList.remove('hidden')
-        features.buttons.saveButton && this.getSaveButtonElement().classList.remove('hidden')
     }
 
     beforeClose() 
     {
-        features.buttons.backButton && this.getSwitchToClassicButtonElement().classList.add('hidden')   
-        features.buttons.saveButton && this.getSaveButtonElement().classList.add('hidden')
-
         this.getClassicPanelContentElement().css('display', this.classicPanelContentElementOriginalDisplayValue)
+
+        if (this.isFullCanvas) {
+            this.getWooHeaderElement().css('display', this.wooHeaderElementOriginalDisplayValue ?? '')
+        }
     }
 
     validate(event) 
@@ -237,7 +237,7 @@ class DashboardManager {
 
     noMainPathValidator() 
     {
-        //,aybe only when this is actually enabled!
+        //maybe only when this is actually enabled!
         if (this.store.getState().uri.type === 'path' && !this.store.getState().uri.value.replace('/', '')) {
             return __('You need to select a path - Coupon URLs')
         }
