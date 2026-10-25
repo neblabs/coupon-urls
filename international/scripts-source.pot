@@ -20,5 +20,6 @@ msgid "You need to add one or more actions - Coupon URLs"
 msgstr ""
 
 #: src/DashboardManager.js:80
+#: src/header.jsx:20
 msgid "Back"
 msgstr ""

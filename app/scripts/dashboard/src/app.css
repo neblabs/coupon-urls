@@ -16,8 +16,7 @@
     top: 0;
     z-index: 1000;
 
-    @apply p-4 
-           bg-gray-200;
+    @apply bg-gray-200;
 }
 
 #coupon_urls .cp-select__multi-value__label {

@@ -27,7 +27,7 @@
     "web-vitals": "^1.0.1"
   },
   "scripts": {
-    "start": "craco start",
+    "start": "craco start | npm run css-start",
     "build": "GENERATE_SOURCEMAP=false craco build",
     "css-start": "npx tailwindcss -i ./src/app.css -o ./styles/build/dashboard.css --watch",
     "test": "react-scripts test",

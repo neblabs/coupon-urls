@@ -132,7 +132,7 @@ class DashboardManager {
     createElements() {
         // woo changed the heading markup in newer versions so lets re-add it ourselves
         if (!this.getHeadingRoot().length) {
-            $('.wrap').before('<div class="woocommerce-layout__header-heading--coupons-plus h-12 flex items-center w-full --bg-[#fff]">')
+            $('.wrap').before('<div class="woocommerce-layout__header-heading--coupons-plus h-0 flex items-center w-full --bg-[#fff]">')
         }
 
         this.addDashboardButtons()
