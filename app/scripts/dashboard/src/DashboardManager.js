@@ -26,7 +26,6 @@ class DashboardManager {
     constructor(store, options = {}) {
         this.store = store
 
-        // Supports passing { fullCanvas: true }, a boolean true/false, or reading from features.fullCanvas
         if (typeof options === 'boolean') {
             this.options = { fullCanvas: options }
         } else {
@@ -40,6 +39,7 @@ class DashboardManager {
         this.createElements()
         this.createDashboardOpenCloseEvent()
         this.createSaveEvents()
+        this.setupResizeListeners()
         this.registerInitEvent()
     }
 
@@ -52,9 +52,13 @@ class DashboardManager {
             $(this.getMainElement()).removeClass('hidden')
             this.getClassicPanelContentElement().css('display', 'none')
 
-            // Hide Woo's new header in full-canvas mode so it doesn't take up space
             if (this.isFullCanvas) {
                 this.getWooHeaderElement().css('display', 'none')
+                this.getWpFooterElement().css('display', 'none')
+
+                // Update height immediately and on the next animation frame
+                this.updateCanvasHeight()
+                requestAnimationFrame(() => this.updateCanvasHeight())
             }
         }
     }
@@ -75,7 +79,7 @@ class DashboardManager {
 
     getClassicPanelContentElement() 
     {
-        const contentElement = $('#wpbody-content .wrap');
+        const contentElement = $('#wpbody-content .wrap, #wpbody-content > form#post');
 
         if (typeof this.classicPanelContentElementOriginalDisplayValue === 'undefined') {
             this.classicPanelContentElementOriginalDisplayValue = contentElement.css('display')
@@ -95,9 +99,18 @@ class DashboardManager {
         return headerElement
     }
 
+    getWpFooterElement() {
+        const footerElement = $('#wpfooter');
+
+        if (typeof this.wpFooterElementOriginalDisplayValue === 'undefined' && footerElement.length) {
+            this.wpFooterElementOriginalDisplayValue = footerElement.css('display')
+        }
+
+        return footerElement
+    }
+
     getContainerElement() 
     {
-        // When full canvas is enabled, attach directly to #wpcontent (the WP canvas)
         if (this.isFullCanvas) {
             const wpcontent = $('#wpcontent');
             if (wpcontent.length) {
@@ -106,8 +119,87 @@ class DashboardManager {
             }
         }
 
-        // Leave default rendering untouched
         return $('#wpbody-content');
+    }
+
+    /**
+     * Ensures the dashboard height covers at least all scrollable height
+     * (viewport, left sidebar menu, and document scroll height) and grows as content grows.
+     */
+    updateCanvasHeight() {
+        if (!this.isFullCanvas || !this.state.isOpen) {
+            return;
+        }
+
+        const mainElement = this.getMainElement();
+        if (!mainElement) {
+            return;
+        }
+
+        const wpAdminBar = document.getElementById('wpadminbar');
+        const adminBarHeight = wpAdminBar ? wpAdminBar.offsetHeight : 32;
+
+        // 1. Minimum height needed to cover the visible viewport canvas
+        const viewportCanvasHeight = window.innerHeight - adminBarHeight;
+
+        // 2. Height of the WordPress left admin menu
+        const adminMenu = document.getElementById('adminmenuwrap') || document.getElementById('adminmenu');
+        const adminMenuHeight = adminMenu ? adminMenu.offsetHeight : 0;
+
+        // Temporarily reset min-height to accurately measure underlying scroll height
+        mainElement.style.minHeight = '';
+        const wpContent = document.getElementById('wpcontent');
+        if (wpContent) {
+            wpContent.style.minHeight = '';
+        }
+
+        // 3. Document scroll height
+        const docScrollHeight = Math.max(
+            document.documentElement.scrollHeight - adminBarHeight,
+            document.body.scrollHeight - adminBarHeight
+        );
+
+        // 4. Element's own content height
+        const contentHeight = mainElement.scrollHeight;
+
+        // Take the maximum of all dimensions
+        const targetMinHeight = Math.max(
+            viewportCanvasHeight,
+            adminMenuHeight,
+            docScrollHeight,
+            contentHeight
+        );
+
+        mainElement.style.minHeight = `${targetMinHeight}px`;
+
+        if (wpContent) {
+            wpContent.style.minHeight = `${targetMinHeight}px`;
+        }
+    }
+
+    setupResizeListeners() {
+        if (!this.isFullCanvas) {
+            return;
+        }
+
+        window.addEventListener('resize', () => {
+            if (this.state.isOpen) {
+                this.updateCanvasHeight();
+            }
+        });
+
+        // ResizeObserver watches for DOM changes/growth inside the dashboard content
+        if (typeof ResizeObserver !== 'undefined') {
+            const mainElement = this.getMainElement();
+            if (mainElement) {
+                this.resizeObserver = new ResizeObserver(() => {
+                    if (this.state.isOpen) {
+                        this.updateCanvasHeight();
+                    }
+                });
+                this.resizeObserver.observe(mainElement);
+            }
+        }
     }
 
     addDashboardButtons() 
@@ -165,6 +257,11 @@ class DashboardManager {
                 this.fieldElements[field] = fieldElement
             });
         }
+
+        // Open properly on load if opened by query param
+        if (openedByDefault) {
+            setTimeout(() => this.open(), 0);
+        }
     }
 
     createDashboardOpenCloseEvent() 
@@ -206,6 +303,17 @@ class DashboardManager {
 
         if (this.isFullCanvas) {
             this.getWooHeaderElement().css('display', this.wooHeaderElementOriginalDisplayValue ?? '')
+            this.getWpFooterElement().css('display', this.wpFooterElementOriginalDisplayValue ?? '')
+
+            // Clean up inline min-heights when returning to classic view
+            const mainElement = this.getMainElement();
+            if (mainElement) {
+                mainElement.style.minHeight = '';
+            }
+            const wpcontent = document.getElementById('wpcontent');
+            if (wpcontent) {
+                wpcontent.style.minHeight = '';
+            }
         }
     }
 
@@ -237,7 +345,6 @@ class DashboardManager {
 
     noMainPathValidator() 
     {
-        //maybe only when this is actually enabled!
         if (this.store.getState().uri.type === 'path' && !this.store.getState().uri.value.replace('/', '')) {
             return __('You need to select a path - Coupon URLs')
         }

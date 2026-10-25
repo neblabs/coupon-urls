@@ -3,10 +3,10 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "X-Generator: babel-plugin-makepot\n"
 
-#: src/DashboardManager.js:242
+#: src/DashboardManager.js:349
 msgid "You need to select a path - Coupon URLs"
 msgstr ""
 
-#: src/DashboardManager.js:249
+#: src/DashboardManager.js:356
 msgid "You need to add one or more actions - Coupon URLs"
 msgstr ""
