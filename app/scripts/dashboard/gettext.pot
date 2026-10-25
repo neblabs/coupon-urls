@@ -1,0 +1,217 @@
+msgid ""
+msgstr ""
+"Content-Type: text/plain; charset=utf-8\n"
+"X-Generator: babel-plugin-makepot\n"
+
+#: src/CardHeader.js:34
+msgid "remove"
+msgstr ""
+
+#: src/Column.js:58
+msgid "Remove column"
+msgstr ""
+
+#: src/Column.js:58
+msgid "Remove"
+msgstr ""
+
+#: src/Column.js:93
+msgid ""
+"Row prop: rowData isnt an array (and it needs to be, fallbacking to an "
+"empty array)"
+msgstr ""
+
+#: src/Context.js:161
+msgid "Conditions"
+msgstr ""
+
+#: src/Context.js:175
+msgid "Select a Filter"
+msgstr ""
+
+#: src/Context.js:179
+msgid "If you want to add a condition, create a new column to the right"
+msgstr ""
+
+#: src/Context.js:219
+msgid "Filters"
+msgstr ""
+
+#: src/Context.js:227
+msgid "Select a Condition"
+msgstr ""
+
+#: src/Context.js:230
+msgid "A column may only have conditions or filters but not both"
+msgstr ""
+
+#: src/Context.js:231
+msgid "If you want to add a filter, create a new column to the right"
+msgstr ""
+
+#: src/Context.js:279
+#: src/OffersSelector.js:110
+msgid "Documentation"
+msgstr ""
+
+#: src/Context.js:51
+msgid "No Conditions or Filters!"
+msgstr ""
+
+#: src/CouponPanel.js:8
+msgid "coupon"
+msgstr ""
+
+#: src/DashboardManager.js:142
+msgid "Edit with"
+msgstr ""
+
+#: src/DashboardManager.js:85
+msgid "Back to Classic"
+msgstr ""
+
+#: src/DashboardManager.js:89
+msgid "Code"
+msgstr ""
+
+#: src/DashboardManager.js:96
+msgid "save"
+msgstr ""
+
+#: src/ExtraOptions.js:10
+msgid "Tools"
+msgstr ""
+
+#: src/NewColumnSelector.js:13
+msgid "Regular"
+msgstr ""
+
+#: src/NewColumnSelector.js:14
+#: src/OffersSelector.js:39
+#: src/Rows.js:79
+msgid "Offers"
+msgstr ""
+
+#: src/NewColumnSelector.js:38
+msgid "Select Column Type"
+msgstr ""
+
+#: src/NewColumnSelector.js:57
+msgid "Column Type"
+msgstr ""
+
+#: src/PresetsPanel.js:13
+msgid "presets"
+msgstr ""
+
+#: src/PresetsPanel.js:40
+msgid "Example:"
+msgstr ""
+
+#: src/PresetsPanel.js:57
+msgid "Use preset"
+msgstr ""
+
+#: src/PresetsPanel.js:81
+msgid ""
+"By importing this preset, your current settings will be overriden. Are you "
+"sure want to continue?"
+msgstr ""
+
+#: src/RepeaterFields.js:36
+msgid "Add Product"
+msgstr ""
+
+#: src/Rows.js:30
+#: src/columns/ORColumn.js:39
+#: src/columns/offerColumns/TieredOffersColumn.js:30
+msgid "OR"
+msgstr ""
+
+#: src/Rows.js:55
+msgid "No Rows!"
+msgstr ""
+
+#: src/Rows.js:56
+msgid "Nothing here, yet!"
+msgstr ""
+
+#: src/Rows.js:58
+msgid "Coupons+ is made of:"
+msgstr ""
+
+#: src/Rows.js:61
+msgid "Rows"
+msgstr ""
+
+#: src/Rows.js:67
+msgid "Columns"
+msgstr ""
+
+#: src/Rows.js:73
+msgid "Conditions/Filters"
+msgstr ""
+
+#: src/Rows.js:82
+msgid "Add a new row or select a preset to get started."
+msgstr ""
+
+#: src/columns/ANDColumn.js:39
+msgid "AND"
+msgstr ""
+
+#: src/conditionsOrFilters/conditions/CustomerPurchaseHistory.js:35
+msgid "Has purchased"
+msgstr ""
+
+#: src/conditionsOrFilters/conditions/CustomerPurchaseHistory.js:77
+#: src/conditionsOrFilters/offers/Discount.js:105
+#: src/conditionsOrFilters/offers/ExtraProduct.js:55
+msgid "items"
+msgstr ""
+
+#: src/conditionsOrFilters/filters/Products.js:112
+msgid "ANY Variations..."
+msgstr ""
+
+#: src/conditionsOrFilters/filters/Products.js:113
+msgid "Enter the name of a variation..."
+msgstr ""
+
+#: src/conditionsOrFilters/filters/Products.js:56
+#: src/conditionsOrFilters/offers/ExtraProduct.js:85
+msgid "Product..."
+msgstr ""
+
+#: src/conditionsOrFilters/filters/Products.js:57
+#: src/conditionsOrFilters/offers/ExtraProduct.js:86
+msgid "Enter the name of a product..."
+msgstr ""
+
+#: src/conditionsOrFilters/offers/Discount.js:74
+msgid "Apply to:"
+msgstr ""
+
+#: src/conditionsOrFilters/offers/ExtraProduct.js:129
+msgid "At"
+msgstr ""
+
+#: src/conditionsOrFilters/offers/ExtraProduct.js:131
+msgid "% off"
+msgstr ""
+
+#: src/conditionsOrFilters/offers/ExtraProduct.js:55
+msgid "item"
+msgstr ""
+
+#: src/conditionsOrFilters/offers/ShippingDiscount.js:43
+msgid "%"
+msgstr ""
+
+#: src/options/AutoApplyOptions.js:20
+msgid "Apply coupon automatically? (BETA)"
+msgstr ""
+
+#: src/options/AutoApplyOptions.js:21
+msgid "Applies the coupon automatically to the cart when the requirements are met."
+msgstr ""

@@ -1,0 +1,17 @@
+Dashboard:
+    Validation:
+        -make sure we cant save two urls wit the same path:
+            -check for both publish and trash posts
+            -ideally make sure the path is not from a permalink (from a post or page permalink)
+    Redirections:
+        -make sure we don't redirect if we're on the same page (add a validator to WordPressURLRedirector)
+    Responsive:
+        -make it work on mobile!
+    URI Path: 
+        -allow users to add a (code) to they path that is replaced wit the actual coupon code. eg.: path: /coupons/(code)
+    QR:
+        -add option to use a QR Code. Give them the option to download the image too. 
+    Save:
+        -After saving, if in Coupons+ and the last tab was URL, then open that tab after realding after save.
+    Actions:
+        -New: modify the success message instead of adding an extra message. Maybe even let them modify this value globally for all url coupons

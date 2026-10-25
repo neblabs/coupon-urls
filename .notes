@@ -1,0 +1,3 @@
+-Redirection: By default, no redirection is pefomred if you do not add a rectirection action. This is because you can let a specific page load and apply a coupon at the same time, like you vistit a specific page, apply the coupon and render that same page as usual.
+-will no be applied if other coupons or this one have the option (cannot be combined with other coupons enabled!!)
+-ADD PRODUCT: if the prouct is alreday in the cart with at least the quantity specified, it wont be added since its already added

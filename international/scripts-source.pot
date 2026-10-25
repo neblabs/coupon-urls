@@ -3,22 +3,42 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "X-Generator: babel-plugin-makepot\n"
 
-#: src/DashboardManager.js:104
-msgid "Save"
-msgstr ""
-
-#: src/DashboardManager.js:168
-msgid "Saving..."
-msgstr ""
-
-#: src/DashboardManager.js:233
+#: src/DashboardManager.js:426
 msgid "You need to select a path - Coupon URLs"
 msgstr ""
 
-#: src/DashboardManager.js:240
+#: src/DashboardManager.js:433
 msgid "You need to add one or more actions - Coupon URLs"
 msgstr ""
 
-#: src/DashboardManager.js:80
+#: src/Enabled.js:15
+msgid "Enabled"
+msgstr ""
+
+#: src/Enabled.js:16
+msgid "Disable?"
+msgstr ""
+
+#: src/URI.js:59
+msgid "copy"
+msgstr ""
+
+#: src/URI.js:62
+msgid "Copied!"
+msgstr ""
+
+#: src/URI.js:84
+msgid "Save before testing"
+msgstr ""
+
+#: src/header.jsx:29
 msgid "Back"
+msgstr ""
+
+#: src/header.jsx:35
+msgid "Saving..."
+msgstr ""
+
+#: src/header.jsx:35
+msgid "Save"
 msgstr ""

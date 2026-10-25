@@ -1,0 +1,67 @@
+How to use
+
+---
+
+(object) $onPostSave = new Action(name: 'post_save');
+
+$onPostSave->add(subscriber: new PostSaveSubscriber);
+
+$onPostSave->register();
+
+
+---
+
+Works for filters too.
+
+The subscriber needs to implement the CouponURLs\Original\Events\Subscriber interface.
+
+The Subscriber is a Duck interface, the implementtation cannot be enforced at compile time because the methods have variable arguments. Nevertheless, all methods described in the interface MUST be implemented; they will be used at runtime.
+
+Eg:
+
+Class PostSaveSubscriber implements Subscriber
+{
+    public function priority() : int
+    {
+        return 10;    
+    }
+
+    public function createEventArguments(/*here are the original hook arguments*/) : EventArguments
+    {
+
+    }
+
+    public function validator(/*The arguments set in createEventArguments() will be passed here, by NAME*/) : Validator
+    {
+
+    }
+
+    public function execute(/*The arguments set in createEventArguments() will be passed here, by NAME*/) : void
+    {
+
+    }
+}
+
+---
+
+Requests
+
+This framework also provides classes to specify that a specific hook be used. These are the Request\* classes. This is useful when you want your client code to specify an unnkown action or filter to use at runtime.
+
+You may use them as:
+
+(object) $savePost = new CouponURLs\Original\Events\Wordpress\Request\Action(name: 'save_post');
+
+An interface somewhere in your code may use this request to create and add a scribscriber for that specific action.
+
+For example:
+
+public function createAction(Request\Action $actionRequest) : Action
+{
+    $actionRequest->name() // 'save_post'
+    $actionRequest->type() // 'CouponURLs\Original\Events\Wordpress\Action'
+}
+
+$actionFactory->createAction(new Request\Action(name: 'save_post'));
+
+With these types you can enforce an interface and be sure you'll be working with atcual Hooks.

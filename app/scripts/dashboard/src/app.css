@@ -1,0 +1,76 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+#adminmenu img,
+.wp-menu-image,
+.wp-menu-image::before {
+    border-style: none;
+}
+
+/* Original untouched rendering */
+#coupon_urls {
+    font-family: 'Epilogue', sans-serif;
+    position: absolute;
+    width: 100%;
+    min-height: calc(100vh + 32px);
+    top: 0;
+    z-index: 1000;
+
+    @apply bg-gray-150;
+}
+
+/* --- Full Canvas Mode --- */
+#wpcontent:has(#coupon_urls.coupon_urls--full-canvas) {
+    position: relative;
+}
+
+#coupon_urls.coupon_urls--full-canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    /* Viewport minus WP admin bar (32px desktop, 46px mobile) */
+    min-height: calc(100vh - 32px);
+    min-height: calc(100vh - var(--wp-admin--admin-bar--height, 32px));
+    z-index: 1000;
+}
+#coupon_urls .cp-select__multi-value__label {
+    white-space: normal;
+}
+
+#coupon_urls .cp-select__clear-indicator,
+#coupon_urls .cp-select__dropdown-indicator {
+    @apply px-1
+}
+
+#coupon_urls .cp-select__control {
+    @apply space-x-1 flex flex-row justify-between items-center min-h-10 text-left rounded-4 border-px border-gray-300 focus:border-blue-normal focus:outline-none cursor-default hover:cursor-pointer text-base select-none text-gray-650 bg-gray-100;
+}
+
+#coupon_urls .cp-select__multi-value {
+    @apply bg-gray-150 rounded-4;
+}
+
+#coupon_urls .coupon-urls-header-illustration > svg {
+    width: 80%;
+    left: 8%;
+    height: auto;
+    top: -62%;
+    position: relative;
+}
+
+#coupon_urls .coupon-urls-header-illustration.CouponToBeAddedNotificationMessage svg {
+    top: -15%;   
+}
+
+#coupon_urls .coupon-urls-header-illustration.Redirection svg {
+    top: -70%;
+    width: 71%;
+    left: 21%;
+}
+
+#coupon_urls .coupon-urls-header-illustration.CouponAddedToCartExtraNotificationMessage svg {
+    top: -38%;
+}
