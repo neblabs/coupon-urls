@@ -3,3 +3,4 @@ vendor
 !.changelog
 *.sublime*
 .DS_Store
+wp-cli.yml
