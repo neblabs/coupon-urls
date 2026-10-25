@@ -71,7 +71,7 @@ class DashboardManager {
 
         if (!element) {
 
-            $('.woocommerce-layout__header-heading').prepend(`
+            this.getHeadingRoot().prepend(`
                 <button id="cu-view-switch-to-classic" class="hidden flex flex-row items-center space-x-2 px-5 ml-[calc(var(--large-gap)*-1)] h-full border-r-px border-gray-200 mr-4">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
@@ -94,9 +94,9 @@ class DashboardManager {
 
         if (!element) {
 
-            $('.woocommerce-layout__header-heading').addClass('relative');
+            this.getHeadingRoot().addClass('relative');
 
-            $('.woocommerce-layout__header-heading').append(`
+            this.getHeadingRoot().append(`
                 <button id="cu-save" class="cu-save absolute right-2 top-1/2 -translate-y-1/2 flex flex-row space-x-2 leading-5 items-center ml-6 h-9 px-3 rounded-3 bg-blue-normal ring-blue-shade-200 text-gray-100 capitalize font-light ring-[4px]">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14M5 12a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v4a2 2 0 01-2 2M5 12a2 2 0 00-2 2v4a2 2 0 002 2h14a2 2 0 002-2v-4a2 2 0 00-2-2m-2-4h.01M17 16h.01"></path>
@@ -125,7 +125,16 @@ class DashboardManager {
         //this.addBackToClassicElement()
     }
 
+    getHeadingRoot() {
+        return $('.woocommerce-layout__header-heading--coupons-plus')
+    }
+
     createElements() {
+        // woo changed the heading markup in newer versions so lets re-add it ourselves
+        if (!this.getHeadingRoot().length) {
+            $('.wrap').before('<div class="woocommerce-layout__header-heading--coupons-plus h-12 flex items-center w-full --bg-[#fff]">')
+        }
+
         this.addDashboardButtons()
 
         const urlParams = new URLSearchParams(window.location.search);
@@ -159,11 +168,11 @@ class DashboardManager {
             this.open()
         })
 
-        $('body').on('click', '.woocommerce-layout__header-heading #cu-view-switch-to-classic', () => {
+        $('body').on('click', '.woocommerce-layout__header-heading--coupons-plus #cu-view-switch-to-classic', () => {
             this.close()
         })
 
-        $('body').on('click', '.woocommerce-layout__header-heading #cu-save', (event) => {
+        $('body').on('click', '.woocommerce-layout__header-heading--coupons-plus #cu-save', (event) => {
             const labelElement = $(event.target).is('span')? $(event.target) : $(event.target).find('span')
             labelElement.html(__('Saving...', textDomain))
             $('#publish').click();
