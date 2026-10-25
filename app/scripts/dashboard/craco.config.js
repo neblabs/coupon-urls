@@ -54,7 +54,7 @@ module.exports = {
   // Extend/override the dev server configuration used by CRA
   // See: https://github.com/timarney/react-app-rewired#extended-configuration-options
   devServer: {
-    //port: 8000,
+    port: 3112,
 	headers: {
       "Access-Control-Allow-Origin": "*",
 	  "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, PATCH, OPTIONS",

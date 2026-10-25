@@ -18,7 +18,7 @@ export const Header = ({show}) => {
         }, 500)
     }
     if (!show) {
-        return
+        return null
     }
 
     return <div className="w-full h-12 flex items-center justify-between gap-3">

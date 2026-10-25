@@ -6,7 +6,7 @@ import store from './data/store';
 import DashboardManager from './DashboardManager';
 import { DashboardManagerContext } from './contexts';
 
-const dashboardManager = new DashboardManager(store, false);
+const dashboardManager = new DashboardManager(store, true);
 
 ReactDOM.render(
   <React.StrictMode>

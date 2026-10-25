@@ -2,7 +2,6 @@ import { textDomain } from "./CouponURLs";
 import { security } from "./CouponURLs";
 import { features } from "./CouponURLs";
 import { __ } from "./globals";
-
 class DashboardManager {
     state = {
         isOpen: false
@@ -19,10 +18,6 @@ class DashboardManager {
         this.noMainPathValidator,
     ]
 
-    /**
-     * @param {Object} store
-     * @param {Object|boolean} [options={ fullCanvas: false }] - Flag or options object
-     */
     constructor(store, options = {}) {
         this.store = store
 
@@ -36,29 +31,95 @@ class DashboardManager {
             this.options.fullCanvas ?? features?.fullCanvas ?? false
         )
 
-        this.createElements()
-        this.createDashboardOpenCloseEvent()
-        this.createSaveEvents()
-        this.setupResizeListeners()
+
         this.registerInitEvent()
+
+
+        try {
+            this.createElements()
+            this.createDashboardOpenCloseEvent()
+            this.createSaveEvents()
+            this.setupResizeListeners()
+        } catch (err) {
+            console.warn('[CouponURLs] DOM setup error:', err)
+        }
     }
 
-    open() 
+    registerInitEvent() {
+
+        window.couponURLsDashboardManager = this;
+        window.couponURLsManager = this;
+
+        const emit = () => {
+            document.dispatchEvent(new CustomEvent('CouponURLsInit', {
+                detail: { manager: this }
+            }));
+        };
+
+
+        emit();
+
+
+        setTimeout(emit, 0);
+        setTimeout(emit, 100);
+
+        if (document.readyState !== 'complete') {
+            window.addEventListener('load', emit, { once: true });
+            document.addEventListener('DOMContentLoaded', emit, { once: true });
+        }
+    }
+
+    setFullCanvas(enabled) {
+        this.isFullCanvas = Boolean(enabled);
+        const el = this.getMainElement();
+
+        if (el) {
+            if (this.isFullCanvas) {
+                el.classList.add('coupon_urls--full-canvas');
+                el.style.position = '';
+            } else {
+                el.classList.remove('coupon_urls--full-canvas');
+                el.style.minHeight = '';
+                el.style.position = 'relative';
+            }
+        }
+
+        const wpcontent = document.getElementById('wpcontent');
+        if (wpcontent && !this.isFullCanvas) {
+            wpcontent.style.minHeight = '';
+        }
+
+
+        window.dispatchEvent(new CustomEvent('couponURLs:config:update', {
+            detail: {
+                isFullCanvas: this.isFullCanvas,
+                manager: this
+            }
+        }));
+    }
+
+    open(options = {}) 
     {
-        this.beforeOpen()
+
+        if (typeof options.fullCanvas === 'boolean') {
+            this.setFullCanvas(options.fullCanvas);
+        }
+
+        this.beforeOpen();
 
         if (!this.state.isOpen) {
             this.state.isOpen = true;
-            $(this.getMainElement()).removeClass('hidden')
-            this.getClassicPanelContentElement().css('display', 'none')
+            $(this.getMainElement()).removeClass('hidden');
+
+
+            this.getClassicPanelContentElement().css('display', 'none');
+
 
             if (this.isFullCanvas) {
-                this.getWooHeaderElement().css('display', 'none')
-                this.getWpFooterElement().css('display', 'none')
-
-                // Update height immediately and on the next animation frame
-                this.updateCanvasHeight()
-                requestAnimationFrame(() => this.updateCanvasHeight())
+                this.getWooHeaderElement().css('display', 'none');
+                this.getWpFooterElement().css('display', 'none');
+                this.updateCanvasHeight();
+                requestAnimationFrame(() => this.updateCanvasHeight());
             }
         }
     }
@@ -74,7 +135,10 @@ class DashboardManager {
 
     getMainElement() 
     {
-        return document.getElementById('coupon_urls')
+        if (!this.mainElement) {
+            this.mainElement = document.getElementById('coupon_urls');
+        }
+        return this.mainElement || document.getElementById('coupon_urls');
     }
 
     getClassicPanelContentElement() 
@@ -139,30 +203,30 @@ class DashboardManager {
         const wpAdminBar = document.getElementById('wpadminbar');
         const adminBarHeight = wpAdminBar ? wpAdminBar.offsetHeight : 32;
 
-        // 1. Minimum height needed to cover the visible viewport canvas
+
         const viewportCanvasHeight = window.innerHeight - adminBarHeight;
 
-        // 2. Height of the WordPress left admin menu
+
         const adminMenu = document.getElementById('adminmenuwrap') || document.getElementById('adminmenu');
         const adminMenuHeight = adminMenu ? adminMenu.offsetHeight : 0;
 
-        // Temporarily reset min-height to accurately measure underlying scroll height
+
         mainElement.style.minHeight = '';
         const wpContent = document.getElementById('wpcontent');
         if (wpContent) {
             wpContent.style.minHeight = '';
         }
 
-        // 3. Document scroll height
+
         const docScrollHeight = Math.max(
             document.documentElement.scrollHeight - adminBarHeight,
             document.body.scrollHeight - adminBarHeight
         );
 
-        // 4. Element's own content height
+
         const contentHeight = mainElement.scrollHeight;
 
-        // Take the maximum of all dimensions
+
         const targetMinHeight = Math.max(
             viewportCanvasHeight,
             adminMenuHeight,
@@ -188,7 +252,7 @@ class DashboardManager {
             }
         });
 
-        // ResizeObserver watches for DOM changes/growth inside the dashboard content
+
         if (typeof ResizeObserver !== 'undefined') {
             const mainElement = this.getMainElement();
             if (mainElement) {
@@ -215,17 +279,16 @@ class DashboardManager {
             $('#titlewrap').append(urlsButton)
         }
 
-        //this.addBackToClassicElement()
+
     }
 
     getHeadingRoot() {
-        return $('.woocommerce-layout__header-heading--coupons-plus')
+        return $('.woocommerce-layout__header-heading--coupon-urls')
     }
 
     createElements() {
-        // woo changed the heading markup in newer versions so lets re-add it ourselves
         if (!this.getHeadingRoot().length) {
-            $('.wrap').before('<div class="woocommerce-layout__header-heading--coupons-plus h-0 flex items-center w-full --bg-[#fff]">')
+            $('.wrap').before('<div class="woocommerce-layout__header-heading--coupon-urls h-0 flex items-center w-full --bg-[#fff]">')
         }
 
         this.addDashboardButtons()
@@ -238,8 +301,8 @@ class DashboardManager {
 
         targetContainer.append(`<div id="coupon_urls" class="${openedByDefault || 'hidden'} ${fullCanvasClass} left-0 top-0 z-[1000] w-full relative bg-gray-200"><div>`)
 
-        const form = document.querySelector('form#post')
 
+        const form = document.querySelector('form#post')
         if (form) {
             const fields = [
                 'coupon_urls_state',
@@ -248,7 +311,6 @@ class DashboardManager {
 
             fields.forEach(field => {
                 const fieldElement = document.createElement('input')
-
                 fieldElement.type = 'hidden'
                 fieldElement.id = field
                 fieldElement.name = field
@@ -258,21 +320,13 @@ class DashboardManager {
             });
         }
 
-        // Open properly on load if opened by query param
         if (openedByDefault) {
             setTimeout(() => this.open(), 0);
         }
     }
 
-    createDashboardOpenCloseEvent() 
-    {
-        $('.coupon_urls--open-button').on('click', (event) => {
-            event.preventDefault()
-            this.open()
-        })
-    }
-
     createSaveEvents() {
+
         const publishButton = document.querySelector('#publish.button');
         if (!publishButton) {
             return;
@@ -285,12 +339,35 @@ class DashboardManager {
         }, true);
     }
 
+    createDashboardOpenCloseEvent() {
+        $('.coupon_urls--open-button').on('click', (event) => {
+            event.preventDefault()
+            this.open()
+        })
+    }
+
+
     registerInitEvent() 
     {
-        window.addEventListener(
-            'load', 
-            () => document.dispatchEvent(new CustomEvent('CouponURLsInit', {detail: {manager: this}}))
-        )
+
+        window.couponURLsManager = this;
+        window.CouponURLsDashboardManager = this;
+
+        const dispatchInit = () => {
+            document.dispatchEvent(new CustomEvent('CouponURLsInit', {
+                detail: { manager: this }
+            }));
+        };
+
+
+
+        if (document.readyState === 'complete') {
+            setTimeout(dispatchInit, 0);
+        } else {
+            window.addEventListener('load', dispatchInit, { once: true });
+
+            document.addEventListener('DOMContentLoaded', dispatchInit, { once: true });
+        }
     }
 
     beforeOpen() 
@@ -305,7 +382,7 @@ class DashboardManager {
             this.getWooHeaderElement().css('display', this.wooHeaderElementOriginalDisplayValue ?? '')
             this.getWpFooterElement().css('display', this.wpFooterElementOriginalDisplayValue ?? '')
 
-            // Clean up inline min-heights when returning to classic view
+
             const mainElement = this.getMainElement();
             if (mainElement) {
                 mainElement.style.minHeight = '';
