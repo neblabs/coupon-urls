@@ -279,7 +279,7 @@ Class Collection implements IteratorAggregate, ArrayRepresentation, JsonSerializ
 
     public function last()
     {
-        return isset($this->asArray()[$this->lastKey()])? $this->elements[$this->lastKey()] : null;
+        return $this->lastKey()? (isset($this->asArray()[$this->lastKey()])? $this->elements[$this->lastKey()] : null) : null;
     }
 
     public function haveMoreThan($number) : bool

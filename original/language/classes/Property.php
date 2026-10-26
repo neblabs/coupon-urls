@@ -4,6 +4,7 @@ namespace CouponURLs\Original\Language\Classes;
 
 use CouponURLs\Original\Characters\StringManager;
 use CouponURLs\Original\Collections\Collection;
+use function CouponURLs\Original\Utilities\Collection\_a;
 
 Class Property
 {
@@ -23,7 +24,7 @@ Class Property
             return 'Collection';
         }
 
-        return StringManager::create($this->type)->explode('\\')->last() ?? '';   
+        return _a(StringManager::create($this->type)->explode('\\'))->last() ?? '';
     }
 
     public function getLongType() : string

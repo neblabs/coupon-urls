@@ -27,6 +27,6 @@ class Field implements StructureField
 
     public function is(string $name): bool
     {
-        return $this->name->is($name) || $this->alias->is($name);
+        return $this->name->__is($name) || $this->alias->__is($name);
     } 
 }

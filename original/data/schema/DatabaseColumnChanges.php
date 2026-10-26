@@ -34,17 +34,17 @@ Class DatabaseColumnChanges extends DatabaseColumn
             (string) $name = StringManager::create((string) $field['Field']?: $field['field'])->trim();
 
             if ($this->hasNameChange()) {
-                return $name->is($this->fromColumn->getName());
+                return $name->__is($this->fromColumn->getName());
             }
 
-            return $name->is($this->toColumn->getName());
+            return $name->__is($this->toColumn->getName());
         });
 
         if (is_array($fieldToUpdate)) {
             // here we'll check if the field definiton has changed
             (string) $type = StringManager::create($fieldToUpdate['Type']?: $fieldToUpdate['type'])->trim()->toLowerCase();
 
-            return !$type->is($this->toColumn->getClean('type')->trim()->toLowerCase());
+            return !$type->__is($this->toColumn->getClean('type')->trim()->toLowerCase());
         }
 
         return false;

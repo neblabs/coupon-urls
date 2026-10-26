@@ -22,7 +22,7 @@ class CouponOptionsFromCouponFactory implements CreatableFromCouponUrl
     {
         (object) $couponUrlData = _(get_post_meta($coupon->id()));
         (object) $optionsTemplate = _($couponUrlData->find(
-            fn(array $templates, string $key) => i($key)->is(Env::getWithPrefix('options'))
+            fn(array $templates, string $key) => i($key)->__is(Env::getWithPrefix('options'))
         ));
 
         return $this->couponOptionsFromTemplateFactory->create(

@@ -64,7 +64,7 @@ class CouponsToBeAdded
     {
         $this->setCouponCodes(
             $this->couponCodes()->filter(
-                fn(string $couponCode) => !$coupon->code()->is($couponCode)
+                fn(string $couponCode) => !$coupon->code()->__is($couponCode)
             )->getValues()
         );
     }

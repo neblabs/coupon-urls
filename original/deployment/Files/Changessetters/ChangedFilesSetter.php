@@ -19,7 +19,7 @@ class ChangedFilesSetter implements Executable
                 return;
             }
 
-            if ($this->files->deleted->have(fn(FileVersions $deletedFile) => $deletedFile->source()->relativePath()->is($file->source()->relativePath()))) {
+            if ($this->files->deleted->have(fn(FileVersions $deletedFile) => $deletedFile->source()->relativePath()->__is($file->source()->relativePath()))) {
                 return;
             }
 

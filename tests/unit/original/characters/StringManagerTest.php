@@ -6,6 +6,7 @@ use CouponURLs\Original\Collections\Collection;
 use CouponURLs\Original\Presentation\AttributesManager;
 use CouponURLs\Original\Tests\DatabaseTestCase;
 use CouponURLs\Original\Characters\StringManager;
+use function CouponURLs\Original\Utilities\Collection\_a;
 
 Class StringManagerTest extends \WP_UnitTestcase
 {
@@ -26,15 +27,15 @@ Class StringManagerTest extends \WP_UnitTestcase
     {
         (object) $stringManager = new StringManager($value);
 
-        $this->assertSame($result, $stringManager->is($valueToCheck));
+        $this->assertSame($result, $stringManager->__is($valueToCheck));
     }
 
     public function test_check_is_value_case_insensitive()
     {
         (object) $name = new StringManager('LeA');
 
-        $this->assertFalse($name->is('lea'));
-        $this->assertTrue($name->is('lea', $caseInsensitive = true));
+        $this->assertFalse($name->__is('lea'));
+        $this->assertTrue($name->__is('lea', $caseInsensitive = true));
     }
 
     /**
@@ -62,7 +63,7 @@ Class StringManagerTest extends \WP_UnitTestcase
     {
         (object) $stringManager = new StringManager($stringValue);
 
-        (object) $pieces = $stringManager->explode($delimiter);
+        (object) $pieces = _a($stringManager->explode($delimiter));
 
         $this->assertInstanceof(Collection::class, $pieces);
         $this->assertEquals($result, $pieces->asArray());

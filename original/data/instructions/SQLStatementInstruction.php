@@ -4,6 +4,7 @@ namespace CouponURLs\Original\Data\Instructions;
 
 use CouponURLs\Original\Characters\StringManager;
 use CouponURLs\Original\Collections\Collection;
+use function CouponURLs\Original\Utilities\Collection\_a;
 
 Class SQLStatementInstruction extends Instruction
 {
@@ -20,7 +21,7 @@ Class SQLStatementInstruction extends Instruction
 
     protected function is(string $statementToCheck) : bool
     {
-        (string) $statementType = $this->statement->explode(' ')->first();
+        (string) $statementType = _a($this->statement->explode(' '))->first();
 
         return in_array(strtolower($statementType), explode('|', $statementToCheck));
     }

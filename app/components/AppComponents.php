@@ -21,7 +21,7 @@ class AppComponents
     {
         return $this->componentRegistrators->find(
             fn(ComponentsRegistrator $componentsRegistrator) => $componentsRegistrator->id()
-                                                                                      ->is($id)
+                                                                                      ->__is($id)
         );
     }
 

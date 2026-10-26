@@ -90,7 +90,7 @@ Class Cart extends Entity
     public function hasCoupon(Coupon $coupon) : bool
     {
         return _($this->classic->get_applied_coupons())->have(
-            fn(string $couponCode) => $coupon->code()->is($couponCode)
+            fn(string $couponCode) => $coupon->code()->__is($couponCode)
         );
     }
 

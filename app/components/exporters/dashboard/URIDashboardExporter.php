@@ -19,11 +19,11 @@ class URIDashboardExporter implements DashboardExportableForPost
     public function export(WP_Post $post): array
     {
         /** @var Collection */
-        (object) $uri = i(get_post_meta(
+        (object) $uri = (new Collection(i(get_post_meta(
             post_id: $post->ID,
             key: Env::getWithPrefix('uri'),
             single: true
-        ) ?: '')->explode('|')->getValues() ?: _(['', '']);
+        ) ?: '')->explode('|')))->getValues() ?: _(['', '']);
 
         return a(
             type: $uri->first(),

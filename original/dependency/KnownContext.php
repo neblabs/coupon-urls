@@ -47,7 +47,7 @@ class KnownContext implements Context
 
     protected function checkTheyAreTheSame(StringManager $firstString, StringManager $secondString) : bool
     {
-        return $firstString->is($secondString, caseInsensitive: true);
+        return $firstString->__is($secondString, caseInsensitive: true);
     }
 
     public function fullyQualifiedTypeName() : StringManager
