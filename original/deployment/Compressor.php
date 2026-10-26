@@ -45,7 +45,7 @@ Class Compressor
         print "\n\n\n";
         print "\nCompressed: {$zip->numFiles} files.";
         print "\nStatus: {$zip->getStatusString()}";
-        print "\nBuild: {$zipFileName}\n";
+        print "\n{$zipFileName}\n";
 
         $zip->close();
 
