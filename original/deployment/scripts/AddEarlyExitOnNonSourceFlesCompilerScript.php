@@ -113,7 +113,7 @@ Class AddEarlyExitOnNonSourceFlesCompilerScript extends Script
             //dump('replaced', $this->data->target, /*i($fileData)->trim()->trimLeft('<?php')->prepend("<?php if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly")*/);
             file_put_contents(
                 filename: $this->data->target, 
-                data: i($fileData)->trim()->trimLeft('<?php')->prepend("<?php if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly"),
+                data: i($fileData)->trim()->trimLeft('<?php')->prepend("<?php if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly\n\n"),
             );
         }
     }

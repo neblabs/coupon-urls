@@ -9,6 +9,7 @@ use Symfony\Component\Console\Helper\ProgressBar;
 use Symfony\Component\Finder\Finder;
 use function CouponURLS\Original\Utilities\Text\i;
 
+// this has moved to the ci, not here no more
 Class CheckCompatibilityWithPHPVersionScript extends Script
 {
     public function run()

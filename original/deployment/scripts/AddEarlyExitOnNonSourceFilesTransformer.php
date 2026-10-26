@@ -66,6 +66,6 @@ class AddEarlyExitOnNonSourceFilesTransformer implements Transformable, Validata
         FILEDATA);
         */
 
-        return $fileContents->trim()->trimLeft('<?php')->prepend("<?php if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly");
+        return $fileContents->trim()->trimLeft('<?php')->prepend("<?php if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly\n\n");
     } 
 }

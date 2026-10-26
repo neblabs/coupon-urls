@@ -38,6 +38,7 @@ Class SettingsReader extends Mappable
 
         $this->settings = $this->map($settingsArray);
 
+        return;
         if (!is_dir($this->settings->repository)) {
             throw new \Exception("Unexistent repository: '{$this->settings->repository}', please specify a target repository directory", 1);
             

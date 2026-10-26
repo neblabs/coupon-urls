@@ -24,7 +24,6 @@ use CouponURLS\Original\Deployment\Transformers\WithExcludedFiles;
 use function CouponURLs\Original\Utilities\Collection\{a, _};
 
 return a(
-    repository: '/Applications/MAMP/Repository/CouponURLs',
     directoriesToExclude: [
         'app/build',
         'app/commands',
@@ -219,9 +218,9 @@ return a(
             //DevelopmentServiceExceptionHandlerFactoryRemoverScript::class,
             PHPDowngradeCompilerScript::class,
             //PHPFormatCompilerScript::class,
-            CheckCompatibilityWithPHPVersionScript::class,
+            //CheckCompatibilityWithPHPVersionScript::class,
             ComposerClassMapReloaderScript::class,
-            UpdatePluginOnPHP72SiteScript::class
+            //UpdatePluginOnPHP72SiteScript::class
             /*
             PHPDowngradeCompilerScript::class,
             //PHPFormatCompilerScript::class,
