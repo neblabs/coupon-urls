@@ -18,7 +18,7 @@ class Product
     {
         return match(true) {
             $typeOrProduct instanceof Product => $this->checkIsProduct($typeOrProduct),
-            default => i($this->classic->get_type())->is($typeOrProduct)
+            default => i($this->classic->get_type())->__is($typeOrProduct)
         };
     }
 

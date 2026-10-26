@@ -51,7 +51,7 @@ Class DuckMethodsAreImplementedCorrectly extends Validator
         return _($this->duckInterfaceReflection->getAttributes())->find(
             fn(ReflectionAttribute $reflectionAttribute) => 
                 i($reflectionAttribute->getName())->toLowerCase()
-                                                ->is(
+                                                ->__is(
                                                     i(Methods::class)->toLowerCase()
                                                 )
         )->newInstance();

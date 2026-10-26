@@ -27,7 +27,7 @@ class HomePageURIFactory implements CanCreateEntity, OverloadableEntitiesFactory
         (object) $currentPath = i($data->get('path'))->ensureRight('/');
         (object) $homePath = i('/');
 
-        return $currentPath->is($homePath);
+        return $currentPath->__is($homePath);
     } 
 
     /** @param Collection $data The parse_url() parts */

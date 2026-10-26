@@ -3,6 +3,7 @@
 namespace CouponURLs\Original\Environment;
 
 use CouponURLs\Original\Characters\StringManager;
+use function CouponURLs\Original\Utilities\Collection\_a;
 
 Class Env
 {
@@ -145,9 +146,9 @@ Class Env
 
     public static function getNamespaceFromDirectory(string $path) : string
     {
-        (string) $convertedPath = StringManager::create($path)->trim('/')
+        (string) $convertedPath = _a(StringManager::create($path)->trim('/')
                                                               ->explode('/')
-                                                              ->map(function(string $pathPart) : string {
+)                                                              ->map(function(string $pathPart) : string {
                                                                     return ucfirst($pathPart);
                                                               })
                                                               ->implode('\\');

@@ -6,6 +6,7 @@ use CouponURLS\Original\Deployment\Script;
 use CouponURLS\Original\Environment\Env;
 use Symfony\Component\Filesystem\Filesystem;
 
+use function CouponURLs\Original\Utilities\Collection\_a;
 use function CouponURLS\Original\Utilities\Text\i;
 
 Class UpdatePluginOnPHP72SiteScript extends Script
@@ -14,7 +15,7 @@ Class UpdatePluginOnPHP72SiteScript extends Script
     {
         (object) $filesystem = new Filesystem;
         (string) $copyDirectoryName = $this->data->get('copyDirectoryName');
-        (object) $copyDirectoryNameRelative = i($copyDirectoryName)->explode('/')->last();
+        (object) $copyDirectoryNameRelative = _a(i($copyDirectoryName)->explode('/'))->last();
         (string) $mainPluginDirectory = Env::settings()->directories->main;
 
         print "\nUpdating PHP72 plugin...\n";

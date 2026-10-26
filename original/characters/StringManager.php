@@ -3,10 +3,11 @@
 namespace CouponURLs\Original\Characters;
 
 use DateTime;
-use CouponsPlus\Original\Collections\Collection;
-use CouponsPlus\Original\Collections\ArrayGetter;
-use CouponsPlus\Original\Collections\Mapper\Types;
+use CouponURLs\Original\Collections\Collection;
+use CouponURLs\Original\Collections\ArrayGetter;
+use CouponURLs\Original\Collections\Mapper\Types;
 use JsonSerializable;
+use stdClass;
 use Stringy\Stringy;
 
 Class StringManager extends Stringy implements JsonSerializable
@@ -31,7 +32,7 @@ Class StringManager extends Stringy implements JsonSerializable
         return $this->isNotEmpty();
     }
 
-    public function ___is($text, $caseInsensitive = false)
+    public function __is($text, $caseInsensitive = false): bool
     {
         if (is_array($text)) {
             return false;
@@ -83,15 +84,18 @@ Class StringManager extends Stringy implements JsonSerializable
         return $this->getOnly('A-Za-z0-9_\s');
     }
 
-    public function matches($pattern)
+    public function matches(string|StringManager $pattern) : Collection
     {
-        $str = $this->get();
+        (array) $matches = [];
 
-        $r = preg_match_all($pattern, $this->str);
+        preg_match(
+            pattern: (string) $pattern,
+            subject: $this->get(),
+            matches: $matches
+        );
 
-        return $r == 1;
+        return (new Collection($matches))->removeFirst()->getValues();
     }
-
     public function replaceRegEx($pattern, /*string|array|callable*/ $replacement)
     {
         if (is_callable($replacement)) {
@@ -152,5 +156,41 @@ Class StringManager extends Stringy implements JsonSerializable
         }
 
         return $value;
+    }
+
+    public function import() : static|Collection|stdClass|bool|null
+    {
+        /*mixed*/ $decodedData = json_decode((string) $this, associative: true);
+
+        return match(gettype($decodedData)) {
+            'string' => new static($decodedData),
+            'array' => new Collection($decodedData),
+            default => $decodedData
+        };
+    }
+
+    public function matchesRegEx(string|StringManager $pattern) : bool
+    {
+        $r = preg_match_all($pattern, $this->str);
+
+        return $r > 0;
+    }
+
+    /**
+     * todo: recursively convert all inner array matches to collection
+     * and recursively convert all strings to StringManager
+     *
+     */
+    public function allMatches(string|StringManager $pattern) : Collection
+    {
+        (array) $matches = [];
+
+        preg_match_all(
+            pattern: (string) $pattern,
+            subject: $this->get(),
+            matches: $matches
+        );
+
+        return (new Collection($matches))->removeFirst()->getValues();
     }
 }
