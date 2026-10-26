@@ -4,3 +4,4 @@ vendor
 *.sublime*
 .DS_Store
 wp-cli.yml
+.idea
