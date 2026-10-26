@@ -3,14 +3,10 @@
 namespace CouponURLs\Original\Characters;
 
 use DateTime;
-use CouponURLs\Original\Collections\Collection;
-use CouponURLs\Original\Collections\ArrayGetter;
-use CouponURLs\Original\Collections\Mapper\Types;
-use Collator;
+use CouponsPlus\Original\Collections\Collection;
+use CouponsPlus\Original\Collections\ArrayGetter;
+use CouponsPlus\Original\Collections\Mapper\Types;
 use JsonSerializable;
-use PHPUnit\TestRunner\TestResult\Collector;
-use ReturnTypeWillChange;
-use stdClass;
 use Stringy\Stringy;
 
 Class StringManager extends Stringy implements JsonSerializable
@@ -18,14 +14,14 @@ Class StringManager extends Stringy implements JsonSerializable
     public static function isStringRepresentation($value)
     {
         return is_string($value) || ($value instanceof static) || (is_object($value) && method_exists($value, '__toString'));
-    } 
-    
-    public function isEmpty()
+    }
+
+    public function isEmpty(): bool
     {
         return $this->trim()->length() === 0;
     }
 
-    public function isNotEmpty()
+    public function isNotEmpty(): bool
     {
         return !$this->isEmpty();
     }
@@ -35,7 +31,7 @@ Class StringManager extends Stringy implements JsonSerializable
         return $this->isNotEmpty();
     }
 
-    public function is($text, $caseInsensitive = false)
+    public function ___is($text, $caseInsensitive = false)
     {
         if (is_array($text)) {
             return false;
@@ -48,84 +44,55 @@ Class StringManager extends Stringy implements JsonSerializable
         return $this->get() === ((string) $text);
     }
 
-    public function isNot($text, $caseInsensitive = false)
+    public function isNot($text)
     {
-        return !$this->is($text, $caseInsensitive);
+        return !$this->___is($text);
     }
 
     public function isEither(/*ArrayRepresentation*/ $strings)
     {
         $strings = ArrayGetter::getArrayOrThrowExceptionFrom($strings);
-        
+
         (object) $strings = new Collection($strings);
-        return $strings->contain((string) $this->toLowerCase()->get());        
+        return $strings->contain((string) $this->toLowerCase()->get());
     }
 
     public function isNotEither(/*ArrayRepresentation*/ $strings)
     {
-        return !$this->isEither($strings);        
+        return !$this->isEither($strings);
     }
 
-    public function get() : string
+    public function get()
     {
-        return (string) $this; 
+        return (string) $this;
     }
 
-    public function explode($separator, $limit = null) : Collection
+    public function explode(string $delimiter, ?int $limit = null) : array
     {
-        return (new Collection(explode($separator, $this->get())))
-                   ->map(function($piece){return new StringManager($piece);})
-                   ->filter(
-                    function(StringManager $piece){
-                        return $piece->trim()->hasValue();
-                    }
-        );   
+        return (new Collection(explode($delimiter, $this->get())))
+            ->map(function($piece){return new StringManager($piece);})
+            ->filter(
+                function(StringManager $piece){
+                    return $piece->trim()->hasValue();
+                }
+            )->asArray();
     }
 
-    public function getAlphanumeric() : static
+    public function getAlphanumeric()
     {
         return $this->getOnly('A-Za-z0-9_\s');
     }
 
-    /**
-     * todo: recursively convert all inner array matches to collection
-     * and recursively convert all strings to StringManager
-     * 
-     */
-    public function allMatches(string|StringManager $pattern) : Collection
+    public function matches($pattern)
     {
-        (array) $matches = [];
+        $str = $this->get();
 
-        preg_match_all(
-            pattern: (string) $pattern,
-            subject: $this->get(),
-            matches: $matches
-        );
-
-        return (new Collection($matches))->removeFirst()->getValues();
-    }
-
-    public function matches(string|StringManager $pattern) : Collection
-    {
-        (array) $matches = [];
-
-        preg_match(
-            pattern: (string) $pattern,
-            subject: $this->get(),
-            matches: $matches
-        );
-
-        return (new Collection($matches))->removeFirst()->getValues();
-    }
-
-    public function matchesRegEx(string|StringManager $pattern) : bool
-    {
         $r = preg_match_all($pattern, $this->str);
 
-        return $r > 0; 
+        return $r == 1;
     }
 
-    public function replaceRegEx($pattern, /*string|array|callable*/ $replacement) : static
+    public function replaceRegEx($pattern, /*string|array|callable*/ $replacement)
     {
         if (is_callable($replacement)) {
             $result = preg_replace_callback($pattern, $replacement, $this->get());
@@ -133,41 +100,30 @@ Class StringManager extends Stringy implements JsonSerializable
             $result = preg_replace($pattern, $replacement, $this->get());
         }
 
-        return new static($result);   
+        return new static($result);
     }
-    
-    public function getOnly($pattern) : static
+
+    public function getOnly($pattern)
     {
         return $this->replaceRegEx("/[^{$pattern}]/", '');
     }
 
-    public function decodeUrl() : static
+    public function decodeUrl()
     {
-        return new static(urldecode($this->get()));   
+        return new static(urldecode($this->get()));
     }
 
     public function isDate($format)
     {
-         (object) $date = DateTime::createFromFormat($format, $this->get());
-    
-        return ($date instanceof DateTime) && ($date->format($format) === $this->get());   
+        (object) $date = DateTime::createFromFormat($format, $this->get());
+
+        return ($date instanceof DateTime) && ($date->format($format) === $this->get());
     }
 
-    public function import() : static|Collection|stdClass|bool|null
+    #[\ReturnTypeWillChange]
+    public function jsonSerialize()
     {
-        /*mixed*/ $decodedData = json_decode((string) $this, associative: true);
-
-        return match(gettype($decodedData)) {
-            'string' => new static($decodedData),
-            'array' => new Collection($decodedData),
-            default => $decodedData
-        };
-    }
-
-    #[ReturnTypeWillChange]
-    public function jsonSerialize() : mixed
-    {
-        return $this->str;   
+        return $this->str;
     }
 
     public static function convertToLowerCase()
@@ -178,9 +134,9 @@ Class StringManager extends Stringy implements JsonSerializable
             }
 
             return $value;
-        };   
+        };
     }
- 
+
     public static function stringToNative($value)
     {
         if ($value instanceof StringManager) {
@@ -194,8 +150,7 @@ Class StringManager extends Stringy implements JsonSerializable
 
             return is_array($value)? $convertedCollection->asArray() : $convertedCollection;
         }
-        
-        return $value;
-    }   
 
+        return $value;
+    }
 }

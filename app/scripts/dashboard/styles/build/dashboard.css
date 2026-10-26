@@ -630,15 +630,10 @@ video {
 
 .coupon_urls .absolute {
   position: absolute;
-  position: absolute;
-  position: absolute;
-  position: absolute;
 }
 
 .coupon_urls .relative {
   position: relative;
-  position: relative;
-  position: relative;
 }
 
 .coupon_urls .left-0 {
@@ -647,34 +642,10 @@ video {
 
 .coupon_urls .top-0 {
   top: 0px;
-}
-
-.coupon_urls .top-\[10px\] {
-  top: 10px;
-}
-
-.coupon_urls .-bottom-5 {
-  bottom: -20px;
-}
-
-.coupon_urls .left-0 {
-  left: 0px;
-}
-
-.coupon_urls .top-\[6px\] {
-  top: 6px;
-}
-
-.coupon_urls .left-0 {
-  left: 0px;
 }
 
 .coupon_urls .top-\[8px\] {
   top: 8px;
-}
-
-.coupon_urls .top-0 {
-  top: 0px;
 }
 
 .coupon_urls .-bottom-5 {
@@ -694,7 +665,6 @@ video {
 }
 
 .coupon_urls .z-10 {
-  z-index: 10;
   z-index: 10;
 }
 
@@ -767,23 +737,7 @@ video {
   margin-bottom: 24px;
 }
 
-.coupon_urls .mt-1 {
-  margin-top: 4px;
-}
-
-.coupon_urls .mb-6 {
-  margin-bottom: 24px;
-}
-
-.coupon_urls .mt-0 {
-  margin-top: 0px;
-}
-
 .coupon_urls .flex {
-  display: flex;
-  display: flex;
-  display: flex;
-  display: flex;
   display: flex;
 }
 
@@ -796,9 +750,6 @@ video {
 }
 
 .coupon_urls .hidden {
-  display: none;
-  display: none;
-  display: none;
   display: none;
 }
 
@@ -838,10 +789,6 @@ video {
   height: 40px;
 }
 
-.coupon_urls .h-13 {
-  height: 52px;
-}
-
 .coupon_urls .h-9 {
   height: 36px;
 }
@@ -852,46 +799,6 @@ video {
 
 .coupon_urls .h-12 {
   height: 48px;
-}
-
-.coupon_urls .h-4 {
-  height: 16px;
-}
-
-.coupon_urls .h-8 {
-  height: 32px;
-}
-
-.coupon_urls .h-20 {
-  height: 80px;
-}
-
-.coupon_urls .h-full {
-  height: 100%;
-}
-
-.coupon_urls .h-13 {
-  height: 52px;
-}
-
-.coupon_urls .h-6 {
-  height: 24px;
-}
-
-.coupon_urls .h-13 {
-  height: 52px;
-}
-
-.coupon_urls .h-6 {
-  height: 24px;
-}
-
-.coupon_urls .h-full {
-  height: 100%;
-}
-
-.coupon_urls .h-4 {
-  height: 16px;
 }
 
 .coupon_urls .max-h-4 {
@@ -906,14 +813,6 @@ video {
   max-height: 12px;
 }
 
-.coupon_urls .max-h-4 {
-  max-height: 16px;
-}
-
-.coupon_urls .max-h-3 {
-  max-height: 12px;
-}
-
 .coupon_urls .min-h-4 {
   min-height: 16px;
 }
@@ -922,16 +821,8 @@ video {
   min-height: 36px;
 }
 
-.coupon_urls .min-h-3 {
-  min-height: 12px;
-}
-
 .coupon_urls .min-h-16 {
   min-height: 64px;
-}
-
-.coupon_urls .min-h-4 {
-  min-height: 16px;
 }
 
 .coupon_urls .min-h-3 {
@@ -986,27 +877,6 @@ video {
   width: 92%;
 }
 
-.coupon_urls .w-px {
-  width: 1px;
-}
-
-.coupon_urls .w-full {
-  width: 100%;
-}
-
-.coupon_urls .w-8 {
-  width: 32px;
-}
-
-.coupon_urls .w-6 {
-  width: 24px;
-  width: 24px;
-}
-
-.coupon_urls .w-\[92\%\] {
-  width: 92%;
-}
-
 .coupon_urls .min-w-4 {
   min-width: 16px;
 }
@@ -1021,22 +891,6 @@ video {
 
 .coupon_urls .min-w-22 {
   min-width: 88px;
-}
-
-.coupon_urls .min-w-3 {
-  min-width: 12px;
-}
-
-.coupon_urls .min-w-65 {
-  min-width: 260px;
-}
-
-.coupon_urls .min-w-\[18px\] {
-  min-width: 18px;
-}
-
-.coupon_urls .min-w-4 {
-  min-width: 16px;
 }
 
 .coupon_urls .min-w-3 {
@@ -1067,22 +921,6 @@ video {
   max-width: 12px;
 }
 
-.coupon_urls .max-w-\[400px\] {
-  max-width: 400px;
-}
-
-.coupon_urls .max-w-\[18px\] {
-  max-width: 18px;
-}
-
-.coupon_urls .max-w-4 {
-  max-width: 16px;
-}
-
-.coupon_urls .max-w-3 {
-  max-width: 12px;
-}
-
 .coupon_urls .flex-shrink-0 {
   flex-shrink: 0;
 }
@@ -1094,13 +932,6 @@ video {
 
 .coupon_urls .-translate-y-full {
   --tw-translate-y: -100%;
-  transform: var(--tw-transform);
-}
-
-.coupon_urls .-translate-x-full {
-  --tw-translate-x: -100%;
-  transform: var(--tw-transform);
-  --tw-translate-x: -100%;
   transform: var(--tw-transform);
 }
 
@@ -1127,15 +958,9 @@ video {
 
 .coupon_urls .flex-row {
   flex-direction: row;
-  flex-direction: row;
-  flex-direction: row;
 }
 
 .coupon_urls .flex-col {
-  flex-direction: column;
-  flex-direction: column;
-  flex-direction: column;
-  flex-direction: column;
   flex-direction: column;
 }
 
@@ -1145,14 +970,9 @@ video {
 
 .coupon_urls .items-end {
   align-items: flex-end;
-  align-items: flex-end;
 }
 
 .coupon_urls .items-center {
-  align-items: center;
-  align-items: center;
-  align-items: center;
-  align-items: center;
   align-items: center;
 }
 
@@ -1162,14 +982,9 @@ video {
 
 .coupon_urls .justify-end {
   justify-content: flex-end;
-  justify-content: flex-end;
 }
 
 .coupon_urls .justify-center {
-  justify-content: center;
-  justify-content: center;
-  justify-content: center;
-  justify-content: center;
   justify-content: center;
 }
 
@@ -1219,32 +1034,15 @@ video {
   margin-bottom: calc(4px * var(--tw-space-y-reverse));
 }
 
-.coupon_urls .space-y-4 > :not([hidden]) ~ :not([hidden]) {
-  --tw-space-y-reverse: 0;
-  margin-top: calc(16px * calc(1 - var(--tw-space-y-reverse)));
-  margin-bottom: calc(16px * var(--tw-space-y-reverse));
-}
-
-.coupon_urls .space-x-1 > :not([hidden]) ~ :not([hidden]) {
-  --tw-space-x-reverse: 0;
-  margin-right: calc(4px * var(--tw-space-x-reverse));
-  margin-left: calc(4px * calc(1 - var(--tw-space-x-reverse)));
-  --tw-space-x-reverse: 0;
-  margin-right: calc(4px * var(--tw-space-x-reverse));
-  margin-left: calc(4px * calc(1 - var(--tw-space-x-reverse)));
-}
-
 .coupon_urls .overflow-auto {
   overflow: auto;
 }
 
 .coupon_urls .overflow-hidden {
   overflow: hidden;
-  overflow: hidden;
 }
 
 .coupon_urls .whitespace-nowrap {
-  white-space: nowrap;
   white-space: nowrap;
 }
 
@@ -1276,41 +1074,12 @@ video {
   border-radius: 4px;
 }
 
-.coupon_urls .rounded-full {
-  border-radius: 999px;
-}
-
-.coupon_urls .rounded-1 {
-  border-radius: 20px;
-}
-
-.coupon_urls .rounded-3 {
-  border-radius: 12px;
-  border-radius: 12px;
-}
-
-.coupon_urls .rounded-6 {
-  border-radius: 4px;
-}
-
-.coupon_urls .rounded-t-3 {
-  border-top-left-radius: 12px;
-  border-top-right-radius: 12px;
-}
-
-.coupon_urls .rounded-l-3 {
-  border-top-left-radius: 12px;
-  border-bottom-left-radius: 12px;
-}
-
 .coupon_urls .rounded-t-1 {
   border-top-left-radius: 20px;
   border-top-right-radius: 20px;
 }
 
 .coupon_urls .rounded-l-3 {
-  border-top-left-radius: 12px;
-  border-bottom-left-radius: 12px;
   border-top-left-radius: 12px;
   border-bottom-left-radius: 12px;
 }
@@ -1320,11 +1089,6 @@ video {
 }
 
 .coupon_urls .border {
-  border-width: 1px;
-}
-
-.coupon_urls .border-px {
-  border-width: 1px;
   border-width: 1px;
 }
 
@@ -1349,14 +1113,6 @@ video {
 .coupon_urls .border-gray-100 {
   --tw-border-opacity: 1;
   border-color: rgba(247, 249, 250, var(--tw-border-opacity));
-}
-
-.coupon_urls .border-gray-200\/80 {
-  border-color: rgba(217, 224, 229, 0.8);
-}
-
-.coupon_urls .border-gray-200\/60 {
-  border-color: rgba(217, 224, 229, 0.6);
 }
 
 .coupon_urls .border-gray-200\/80 {
@@ -1435,57 +1191,6 @@ video {
   background-color: rgba(98, 124, 144, var(--tw-bg-opacity));
 }
 
-.coupon_urls .bg-gray-350 {
-  --tw-bg-opacity: 1;
-  background-color: rgba(171, 186, 198, var(--tw-bg-opacity));
-}
-
-.coupon_urls .bg-gray-400 {
-  --tw-bg-opacity: 1;
-  background-color: rgba(156, 174, 188, var(--tw-bg-opacity));
-}
-
-.coupon_urls .bg-gray-100 {
-  --tw-bg-opacity: 1;
-  background-color: rgba(247, 249, 250, var(--tw-bg-opacity));
-}
-
-.coupon_urls .bg-gray-250 {
-  --tw-bg-opacity: 1;
-  background-color: rgba(202, 211, 219, var(--tw-bg-opacity));
-}
-
-.coupon_urls .bg-gray-250\/40 {
-  background-color: rgba(202, 211, 219, 0.4);
-}
-
-.coupon_urls .bg-\[\#6c90e0\] {
-  --tw-bg-opacity: 1;
-  background-color: rgba(108, 144, 224, var(--tw-bg-opacity));
-  --tw-bg-opacity: 1;
-  background-color: rgba(108, 144, 224, var(--tw-bg-opacity));
-}
-
-.coupon_urls .bg-gray-100 {
-  --tw-bg-opacity: 1;
-  background-color: rgba(247, 249, 250, var(--tw-bg-opacity));
-}
-
-.coupon_urls .bg-\[\#eceff1\] {
-  --tw-bg-opacity: 1;
-  background-color: rgba(236, 239, 241, var(--tw-bg-opacity));
-}
-
-.coupon_urls .bg-gray-350 {
-  --tw-bg-opacity: 1;
-  background-color: rgba(171, 186, 198, var(--tw-bg-opacity));
-}
-
-.coupon_urls .bg-\[\#6c90e0\] {
-  --tw-bg-opacity: 1;
-  background-color: rgba(108, 144, 224, var(--tw-bg-opacity));
-}
-
 .coupon_urls .bg-opacity-70 {
   --tw-bg-opacity: 0.7;
 }
@@ -1512,10 +1217,6 @@ video {
 
 .coupon_urls .p-2 {
   padding: 8px;
-}
-
-.coupon_urls .p-3 {
-  padding: 12px;
 }
 
 .coupon_urls .px-8 {
@@ -1553,51 +1254,19 @@ video {
   padding-right: 48px;
 }
 
+.coupon_urls .py-1 {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
 .coupon_urls .py-0 {
   padding-top: 0px;
   padding-bottom: 0px;
 }
 
-.coupon_urls .py-1 {
-  padding-top: 4px;
-  padding-bottom: 4px;
-}
-
 .coupon_urls .py-3 {
   padding-top: 12px;
   padding-bottom: 12px;
-}
-
-.coupon_urls .py-2 {
-  padding-top: 8px;
-  padding-bottom: 8px;
-}
-
-.coupon_urls .px-3 {
-  padding-left: 12px;
-  padding-right: 12px;
-}
-
-.coupon_urls .px-2 {
-  padding-left: 8px;
-  padding-right: 8px;
-  padding-left: 8px;
-  padding-right: 8px;
-}
-
-.coupon_urls .px-3 {
-  padding-left: 12px;
-  padding-right: 12px;
-}
-
-.coupon_urls .py-1 {
-  padding-top: 4px;
-  padding-bottom: 4px;
-}
-
-.coupon_urls .px-2 {
-  padding-left: 8px;
-  padding-right: 8px;
 }
 
 .coupon_urls .pb-2 {
@@ -1606,14 +1275,6 @@ video {
 
 .coupon_urls .pb-4 {
   padding-bottom: 16px;
-}
-
-.coupon_urls .pl-1 {
-  padding-left: 4px;
-}
-
-.coupon_urls .pb-\[2px\] {
-  padding-bottom: 2px;
 }
 
 .coupon_urls .pl-1 {
@@ -1644,34 +1305,16 @@ video {
   font-size: 19.93px;
 }
 
+.coupon_urls .text-smaller-2 {
+  font-size: 11.12px;
+}
+
 .coupon_urls .text-base {
   font-size: 14px;
 }
 
 .coupon_urls .text-3x {
   font-size: 17.72px;
-}
-
-.coupon_urls .text-smaller-2 {
-  font-size: 11.12px;
-}
-
-.coupon_urls .text-smaller-1 {
-  font-size: 12.44px;
-  font-size: 12.44px;
-  font-size: 12.44px;
-}
-
-.coupon_urls .text-smaller-2 {
-  font-size: 11.12px;
-}
-
-.coupon_urls .text-3x {
-  font-size: 17.72px;
-}
-
-.coupon_urls .text-smaller-1 {
-  font-size: 12.44px;
 }
 
 .coupon_urls .font-light {
@@ -1684,19 +1327,10 @@ video {
 
 .coupon_urls .uppercase {
   text-transform: uppercase;
-  text-transform: uppercase;
 }
 
 .coupon_urls .capitalize {
   text-transform: capitalize;
-}
-
-.coupon_urls .leading-\[15px\] {
-  line-height: 15px;
-}
-
-.coupon_urls .leading-\[19px\] {
-  line-height: 19px;
 }
 
 .coupon_urls .leading-\[15px\] {
@@ -1774,46 +1408,6 @@ video {
   color: rgba(247, 249, 250, 0.9);
 }
 
-.coupon_urls .text-gray-100 {
-  --tw-text-opacity: 1;
-  color: rgba(247, 249, 250, var(--tw-text-opacity));
-}
-
-.coupon_urls .text-gray-550 {
-  --tw-text-opacity: 1;
-  color: rgba(111, 136, 157, var(--tw-text-opacity));
-}
-
-.coupon_urls .text-current {
-  color: currentColor;
-}
-
-.coupon_urls .text-gray-100 {
-  --tw-text-opacity: 1;
-  color: rgba(247, 249, 250, var(--tw-text-opacity));
-  --tw-text-opacity: 1;
-  color: rgba(247, 249, 250, var(--tw-text-opacity));
-}
-
-.coupon_urls .text-transparent {
-  color: transparent;
-}
-
-.coupon_urls .text-gray-400 {
-  --tw-text-opacity: 1;
-  color: rgba(156, 174, 188, var(--tw-text-opacity));
-}
-
-.coupon_urls .text-gray-300 {
-  --tw-text-opacity: 1;
-  color: rgba(187, 199, 209, var(--tw-text-opacity));
-}
-
-.coupon_urls .text-gray-100 {
-  --tw-text-opacity: 1;
-  color: rgba(247, 249, 250, var(--tw-text-opacity));
-}
-
 .coupon_urls .antialiased {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -1838,8 +1432,6 @@ video {
 }
 
 .coupon_urls .shadow-card {
-  --tw-shadow: 0 4px 10px -6px rgba(0, 0, 0, 0.04), 0 2px 4px -1px rgba(0, 0, 0, 0.02);
-  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
   --tw-shadow: 0 4px 10px -6px rgba(0, 0, 0, 0.04), 0 2px 4px -1px rgba(0, 0, 0, 0.02);
   box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
 }
@@ -2006,13 +1598,6 @@ video {
   background-color: rgba(232, 236, 240, var(--tw-bg-opacity));
 }
 
-.coupon_urls .hover\:bg-gray-450:hover {
-  --tw-bg-opacity: 1;
-  background-color: rgba(141, 161, 178, var(--tw-bg-opacity));
-  --tw-bg-opacity: 1;
-  background-color: rgba(141, 161, 178, var(--tw-bg-opacity));
-}
-
 .coupon_urls .hover\:text-gray-100:hover {
   --tw-text-opacity: 1;
   color: rgba(247, 249, 250, var(--tw-text-opacity));
@@ -2053,13 +1638,9 @@ video {
 
 .coupon_urls .group:hover .group-hover\:block {
   display: block;
-  display: block;
-  display: block;
 }
 
 .coupon_urls .group:hover .group-hover\:hidden {
-  display: none;
-  display: none;
   display: none;
 }
 
