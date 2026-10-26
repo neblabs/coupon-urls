@@ -18,6 +18,9 @@
     "wp-coding-standards/wpcs": "^3.0",
     "php-stubs/woocommerce-stubs": "^8.3"
   },
+  "scripts": {
+      "install": "composer install --ignore-platform-reqs"
+  },
   "repositories": [
     {
       "type": "package",
