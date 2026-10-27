@@ -45,9 +45,9 @@ Class StringManager extends Stringy implements JsonSerializable
         return $this->get() === ((string) $text);
     }
 
-    public function isNot($text)
+    public function isNot($text, $caseInsensitive = false)
     {
-        return !$this->___is($text);
+        return !$this->__is($text, $caseInsensitive);
     }
 
     public function isEither(/*ArrayRepresentation*/ $strings)

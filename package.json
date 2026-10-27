@@ -1,0 +1,27 @@
+{
+  "name": "coupon-urls",
+  "description": "",
+  "main": "index.js",
+  "directories": {
+    "test": "tests"
+  },
+  "dependencies": {
+    "@woocommerce/e2e-utils-playwright": "^0.5.1",
+    "@wordpress/e2e-test-utils-playwright": "^1.53.0",
+    "undici-types": "^8.3.0"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.62.1",
+    "@types/node": "^20.19.43",
+    "typescript": "^7.0.2"
+  },
+  "scripts": {
+    "env:start": "wp-env start --config=test.wp-env.json",
+    "e2e:start:app": "cd app/scripts/dashboard && IGNORE_OVERLAY=yes npm run dev",
+    "e2e:smoke": "WP_BASE_URL=http://localhost:8888 npx playwright test",
+    "e2e:tools:remove-cache": "rm -rf artifacts"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}

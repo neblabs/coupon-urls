@@ -1,11 +1,12 @@
 <?php
 
-namespace CouponURLS\Original\Deployment;
+namespace CouponURLs\Original\Deployment;
 
-use CouponURLS\Original\Characters\StringManager;
+use CouponURLs\Original\Characters\StringManager;
 use Symfony\Component\Finder\Finder;
 use ZipArchive;
 
+#[\AllowDynamicProperties]
 Class Compressor
 {
     protected $copyDirectoryName;
@@ -17,15 +18,15 @@ Class Compressor
         $this->projectFolderName = $projectFolderName;
         $this->finder = new Finder;
     }
-    
+
     public function compress()
     {
         (object) $zip = new ZipArchive();
 
         (string) $zipFileName = "{$this->finalBuildDirectory}/{$this->projectFolderName}.zip";
 
-        (boolean) $openResult = $zip->open(
-            $zipFileName, 
+        (bool) $openResult = $zip->open(
+            $zipFileName,
             ZipArchive::CREATE
         );
 
@@ -34,7 +35,7 @@ Class Compressor
         foreach ($this->finder->files()->in($this->copyDirectoryName) as $fileToCompress) {
             $zip->addFile(
                 $source = $fileToCompress->getRealPath(),
-                $target = $this->getLowerCaseTargetFileName(
+                $target = static::getLowerCaseTargetFileName(
                     $fileToCompress->getRealPath(),
                     $fileToCompress->getRelativePathname()
                 )
@@ -44,14 +45,14 @@ Class Compressor
         print "\n\n\n";
         print "\nCompressed: {$zip->numFiles} files.";
         print "\nStatus: {$zip->getStatusString()}";
-        print "\nBuild: {$zipFileName}\n";
+        print "\n{$zipFileName}\n";
 
-        $zip->close();        
+        $zip->close();
 
         return $zipFileName;
     }
 
-    protected function getLowerCaseTargetFileName($absoluteFilePath, $relativeFilePath)
+    public static function getLowerCaseTargetFileName($absoluteFilePath, $relativeFilePath)
     {
         (object) $file = StringManager::create($relativeFilePath);
 

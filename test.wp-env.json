@@ -1,0 +1,12 @@
+{
+  "testsEnvironment": false,
+  "phpVersion": "8.2",
+  "port": 8888,
+  "plugins": [
+    "https://downloads.wordpress.org/plugin/woocommerce.zip",
+    "."
+  ],
+  "lifecycleScripts": {
+    "afterStart": "bash tests/setup-env.sh"
+  }
+}

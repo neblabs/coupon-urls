@@ -1,0 +1,104 @@
+#!/usr/bin/env node
+import { parseArgs } from 'node:util';
+import fs from 'node:fs';
+import path from 'node:path';
+
+const options = {
+  root: {
+    type: 'string',
+    default: process.cwd(),
+  },
+};
+
+const { values } = parseArgs({ options });
+const rootDir = path.resolve(values.root || process.cwd());
+
+// 1. Target directories to process
+const TARGET_DIRS = ['app', 'original', 'tests'];
+
+// 2. Specify directories or relative paths to exclude
+const EXCLUDE_DIRS = ['app/scripts', 'node_modules', '.git', 'vendor'];
+
+/**
+ * Checks if a file or directory matches an exclusion rule by basename or relative path.
+ */
+function isExcluded(itemPath) {
+  const relPath = path.relative(rootDir, itemPath).replace(/\\/g, '/');
+  const baseName = path.basename(itemPath);
+
+  return EXCLUDE_DIRS.some((exclude) => {
+    const normExclude = path.normalize(exclude).replace(/\\/g, '/');
+    return (
+      baseName === normExclude ||
+      relPath === normExclude ||
+      relPath.startsWith(`${normExclude}/`)
+    );
+  });
+}
+
+/**
+ * Safely renames a file or directory to lowercase using 2-step rename for macOS APFS.
+ */
+function safeRenameToLower(itemPath) {
+  if (isExcluded(itemPath)) return itemPath;
+
+  const dir = path.dirname(itemPath);
+  const baseName = path.basename(itemPath);
+  const lowerBaseName = baseName.toLowerCase();
+
+  if (baseName === lowerBaseName) return itemPath;
+
+  const targetPath = path.join(dir, lowerBaseName);
+  const tempPath = path.join(dir, `__temp_${Date.now()}_${lowerBaseName}`);
+
+  fs.renameSync(itemPath, tempPath);
+  fs.renameSync(tempPath, targetPath);
+
+  console.log(`Renamed: ${path.relative(rootDir, itemPath)} -> ${lowerBaseName}`);
+  return targetPath;
+}
+
+/**
+ * Traverses directories bottom-up so path references remain valid during renames.
+ */
+function processDirectory(dirPath) {
+  if (isExcluded(dirPath)) {
+    console.log(`Skipped excluded directory: ${path.relative(rootDir, dirPath)}`);
+    return;
+  }
+
+  let entries;
+  try {
+    entries = fs.readdirSync(dirPath, { withFileTypes: true });
+  } catch (err) {
+    console.error(`Error reading directory ${dirPath}: ${err.message}`);
+    return;
+  }
+
+  for (const entry of entries) {
+    const fullPath = path.join(dirPath, entry.name);
+
+    if (isExcluded(fullPath)) {
+      console.log(`Skipped excluded path: ${path.relative(rootDir, fullPath)}`);
+      continue;
+    }
+
+    if (entry.isDirectory()) {
+      processDirectory(fullPath);
+      safeRenameToLower(fullPath);
+    } else {
+      safeRenameToLower(fullPath);
+    }
+  }
+}
+
+// Execute script
+TARGET_DIRS.forEach((dir) => {
+  const resolvedPath = path.resolve(rootDir, dir);
+  if (fs.existsSync(resolvedPath)) {
+    processDirectory(resolvedPath);
+    safeRenameToLower(resolvedPath);
+  } else {
+    console.warn(`Target path not found: ${dir}`);
+  }
+});

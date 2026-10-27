@@ -38,7 +38,7 @@ require_once "{$_tests_dir}/includes/functions.php";
 function _manually_load_plugin() {
     $mainpluginurl = dirname( dirname( __FILE__ ) );
 
-	require_once $mainpluginurl . '/coupon-urls.php';
+	require_once $mainpluginurl . '/index.php';
 
     foreach (CouponURLs\Original\Environment\Env::settings()->tests?->loadPlugins ?? [] as $relativePath) {
         require_once dirname( dirname( dirname(__FILE__) ) ) . "/{$relativePath}";

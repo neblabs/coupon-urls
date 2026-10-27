@@ -24,7 +24,6 @@ use CouponURLS\Original\Deployment\Transformers\WithExcludedFiles;
 use function CouponURLs\Original\Utilities\Collection\{a, _};
 
 return a(
-    repository: '/Applications/MAMP/Repository/CouponURLs',
     directoriesToExclude: [
         'app/build',
         'app/commands',
@@ -32,7 +31,7 @@ return a(
         'app/creators',
         'app/tasks',
         'app/credentials',
-        'app/presentation/components/DashboardDevelopmentScripts',
+        'app/presentation/components/dashboarddevelopmentscripts',
         'app/scripts/dashboard/.git',
         //'app/scripts/dashboard/build/static/css',
         'app/scripts/dashboard/public',
@@ -115,8 +114,9 @@ return a(
         'vendor/symfony/polyfill-ctype',
         'vendor/ta-tikoma',
         'vendor/theseer',
-        'vendor/voku',
+        //'vendor/voku',
         'vendor/webmozart',
+        'node_modules'
 
     ],
     filesToExclude: [
@@ -176,7 +176,7 @@ return a(
             new AddEarlyExitOnNonSourceFilesTransformer,
             new WithExcludedFiles(new ArryToArrayTransformer, _(
                 'utilities/collection/collection.php',
-                'coupon-urls.php'
+                'index.php'
             )),   
         ),
         beforeClone: [
@@ -193,11 +193,11 @@ return a(
             CustomToWordPressTranslationFunctionCompilerScript::class,
             ArryToArrayCompilerScript::withFilesToExclude([
                 'utilities/collection/collection.php',
-                'coupon-urls.php'
+                'index.php'
             ]),
             _ToNewCollectionCompilerScript::withFilesToExclude([
                 'utilities/collection/collection.php',
-                'coupon-urls.php'
+                'index.php'
             ]),
             NamedArgumentCollectionCallsToAssociativeArrayCallsCompilerScript::class,
             TransformGlobalFunctionWrapperIntoDirectFunctionCallCompilerScript::class,
@@ -206,11 +206,11 @@ return a(
             /*
             ArryToArrayCompilerScript::withFilesToExclude([
                 'utilities/collection/collection.php',
-                'coupon-urls.php'
+                'index.php'
             ]),
             _ToNewCollectionCompilerScript::withFilesToExclude([
                 'utilities/collection/collection.php',
-                'coupon-urls.php'
+                'index.php'
             ]),
             NamedArgumentCollectionCallsToAssociativeArrayCallsCompilerScript::class,
             TransformGlobalFunctionWrapperIntoDirectFunctionCallCompilerScript::class,*/
@@ -219,9 +219,9 @@ return a(
             //DevelopmentServiceExceptionHandlerFactoryRemoverScript::class,
             PHPDowngradeCompilerScript::class,
             //PHPFormatCompilerScript::class,
-            CheckCompatibilityWithPHPVersionScript::class,
+            //CheckCompatibilityWithPHPVersionScript::class,
             ComposerClassMapReloaderScript::class,
-            UpdatePluginOnPHP72SiteScript::class
+            //UpdatePluginOnPHP72SiteScript::class
             /*
             PHPDowngradeCompilerScript::class,
             //PHPFormatCompilerScript::class,

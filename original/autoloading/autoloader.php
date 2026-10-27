@@ -19,7 +19,8 @@ Class Autoloader
 
                 $autoLoader->loadClass();
             } catch(Error $exception) {
-                throw new AutoloaderException("Error when trying to load class: {$name}. Error message: {$exception->getMessage()} in: {$exception->getFile()}:{$exception->getLine()}\n\n");
+                throw $exception;
+                //throw new AutoloaderException("Error when trying to load class: {$name}. Error message: {$exception->getMessage()} in: {$exception->getFile()}:{$exception->getLine()}\n\n");
             }
         });
     }

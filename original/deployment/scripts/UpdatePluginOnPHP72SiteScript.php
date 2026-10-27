@@ -9,6 +9,7 @@ use Symfony\Component\Filesystem\Filesystem;
 use function CouponURLs\Original\Utilities\Collection\_a;
 use function CouponURLS\Original\Utilities\Text\i;
 
+// not used anymore, pending deletion
 Class UpdatePluginOnPHP72SiteScript extends Script
 {
     public function run()

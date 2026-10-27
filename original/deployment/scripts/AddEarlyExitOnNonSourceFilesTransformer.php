@@ -15,7 +15,9 @@ class AddEarlyExitOnNonSourceFilesTransformer implements Transformable, Validata
     public function canBeTransformed(StringManager $fileContents, FileVersions $fileVersions): Validator
     {
         return new Validators([
-            new ValidWhen(!$fileContents->matchesRegEx('/namespace\s+\w+/i'))
+            new ValidWhen(
+                fn() => $fileContents->matchesRegEx('/^function\s+\w+\(/mi') || !$fileContents->matchesRegEx('/namespace\s+\w+/i')
+            ),
         ]);
     } 
 
@@ -66,6 +68,19 @@ class AddEarlyExitOnNonSourceFilesTransformer implements Transformable, Validata
         FILEDATA);
         */
 
-        return $fileContents->trim()->trimLeft('<?php')->prepend("<?php if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly");
-    } 
+
+        $exitStatement = "if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly\n\n";
+
+        // If the file has a namespace, the exit check MUST go AFTER the namespace declaration
+        if ($fileContents->matchesRegEx('/namespace\s+[^;]+;/i')) {
+            return $fileContents->replaceRegEx(
+                '/^(namespace\s+[^;]+;\s*)/mi',
+                fn(array $matches) => $matches[1] . "\n" . $exitStatement
+            );
+        }
+
+        // Otherwise (non-namespaced files), place it right after <?php
+        return $fileContents->trim()->trimLeft('<?php')->prepend("<?php\n\n{$exitStatement}");
+
+    }
 }

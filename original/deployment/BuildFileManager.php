@@ -23,6 +23,7 @@ Class BuildFileManager
     protected FileSystem $fileSystem;
 
     public function __construct(
+        protected string $dir = '',
         protected OutputInterface $output
     )
     {
@@ -58,7 +59,7 @@ Class BuildFileManager
             (string) $absoluteDirToExclude = "{$this->currentDirectory}/{$directoryToExclude}";
 
             if (!is_dir($absoluteDirToExclude)) {
-                throw new \Exception("Nonexistent file to exclude: $absoluteDirToExclude");
+                //throw new \Exception("Nonexistent file to exclude: $absoluteDirToExclude");
                 
             }
             $finder->exclude($directoryToExclude);
@@ -214,12 +215,13 @@ Class BuildFileManager
 
     protected function getTargetDirectory($directoryName)
     {
-        (string) $copiesDirectory = "{$this->settingsReader->settings->repository}/{$directoryName}";
+        $basedir = rtrim($this->dir ?: $this->settingsReader->settings->repository, '/');
+
+        (string) $copiesDirectory = "{$basedir}/{$directoryName}";
 
         if (!is_dir($copiesDirectory)) {
             $this->fileSystem->mkdir($copiesDirectory);
         }
 
-        return $copiesDirectory; 
-    }
-}
+        return $copiesDirectory;
+    }}
