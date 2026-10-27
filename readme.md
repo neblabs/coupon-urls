@@ -1,10 +1,6 @@
 === Coupon URLs - Apply a Coupon from a Custom Link - for WooCommerce ===
 Contributors: neblabs
 Tags: woocommerce, coupons, woocommerce coupons, url coupons
-Requires at least: 4.7
-Tested up to: 6.7
-Stable tag: 1.3.3.1
-Requires PHP: 7.2
 License: GPLv2
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 

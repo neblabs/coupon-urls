@@ -1,0 +1,21 @@
+name: Run tests on pull request
+
+on: 
+  pull_request:
+    paths-ignore:
+      - '.github/**'
+  workflow_dispatch:
+    
+permissions:
+    contents: write
+    pull-requests: write
+    actions: write # for cancellations
+
+jobs:
+    call_smoke_tests_workflow:
+        uses: rafark/cicd-labs/.github/workflows/build.yml@main
+        with:
+          plugin-slug: coupon-urls-for-woocommerce
+          # default is true but lets make it explicit here anyway.
+          run-playwright-tests: true 
+          

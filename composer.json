@@ -20,7 +20,13 @@
   },
   "scripts": {
       "dev": "cd app/scripts/dashboard && npm run start",
-      "install": "composer install --ignore-platform-reqs"
+      "install": "composer install --ignore-platform-reqs",
+      "install-scripts-ci": [
+        "cd app/scripts/dashboard && npm ci --no-audit --prefer-offline"
+      ],
+      "build-scripts": [
+        "cd app/scripts/dashboard && npm run build"
+      ]
   },
   "repositories": [
     {
