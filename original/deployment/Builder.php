@@ -20,7 +20,6 @@ Class Builder
 
     public function build()
     {
-        $this->input->getOption('silent') && ob_start();
         (string) $copyDirectoryName = $this->buildFileManager->createCopyDirectory();
 
         $this->buildFileManager->cloneDirectories($copyDirectoryName);
@@ -33,9 +32,7 @@ Class Builder
 
         $this->runScripts();
 
-        if ($this->input->getOption('silent') && ob_end_clean()) {
-            echo $path;
-        }
+        echo $path;
     }
 
     public function runScripts()
