@@ -14,7 +14,7 @@ return [
     'files' => [
         'plugin' => [
             'in' => 'index.php',
-            'out' => '((slug)).php'
+            'out' => 'coupon-urls.php'
         ],
         'readme' => 'readme.md'
     ]
