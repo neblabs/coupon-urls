@@ -19,6 +19,7 @@
     "php-stubs/woocommerce-stubs": "^8.3"
   },
   "scripts": {
+      "dev": "cd app/scripts/dashboard && npm run start",
       "install": "composer install --ignore-platform-reqs"
   },
   "repositories": [
