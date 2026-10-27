@@ -28,7 +28,7 @@
   },
   "scripts": {
     "start": "npx craco start | npm run css-start",
-    "build": "GENERATE_SOURCEMAP=false npx craco build",
+    "build": "DISABLE_ESLINT_PLUGIN=true GENERATE_SOURCEMAP=false npx craco build",
     "css-start": "npx tailwindcss -i ./src/app.css -o ./styles/build/dashboard.css --watch",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
