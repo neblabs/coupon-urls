@@ -16,10 +16,7 @@ class AddEarlyExitOnNonSourceFilesTransformer implements Transformable, Validata
     {
         return new Validators([
             new ValidWhen(
-                // only on non-namespaced files
-                fn() => !$fileContents->matchesRegEx('/namespace\s+\w+/i') ||
-                        // ...OR it has a namespace but a function def. and that needs early exiting to satisfy the wp parser even though we do not really need it...
-                        $fileContents->matchesRegEx('/^function\s+\w+\(/mi')
+                fn() => $fileContents->matchesRegEx('/^function\s+\w+\(/mi') || !$fileContents->matchesRegEx('/namespace\s+\w+/i')
             ),
         ]);
     } 
