@@ -114,8 +114,9 @@ return a(
         'vendor/symfony/polyfill-ctype',
         'vendor/ta-tikoma',
         'vendor/theseer',
-        'vendor/voku',
+        //'vendor/voku',
         'vendor/webmozart',
+        'node_modules'
 
     ],
     filesToExclude: [
