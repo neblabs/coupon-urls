@@ -26,6 +26,10 @@
       ],
       "build-scripts": [
         "cd app/scripts/dashboard && npm run build"
+      ],
+      "pre-build": [
+        "chmod +x app/commands/lowercase-all-paths",
+        "node app/commands/lowercase-all-paths"
       ]
   },
   "repositories": [
