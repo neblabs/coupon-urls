@@ -4,7 +4,7 @@ return [
     'slug' => 'coupon-urls-for-woocommerce',
     'pluginFile' => 'index.php', # this will be rewritten to the target build by the header-injector when doing the transformations.
     'requires' => [
-        'wp' => 5.0,
+        'wp' => 5.1,
         'php' => 7.2
     ],
     'urls' => [
