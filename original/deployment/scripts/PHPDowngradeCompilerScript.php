@@ -16,6 +16,7 @@ Class PHPDowngradeCompilerScript extends Script
         print "\nrunning rector: $command\n";
         (string) $outPut = shell_exec($command);
 
+
         print $outPut;
     }
     
