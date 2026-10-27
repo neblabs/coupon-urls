@@ -3,6 +3,22 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "X-Generator: babel-plugin-makepot\n"
 
+#: src/ActionButtons.js:16
+msgid "Add action"
+msgstr ""
+
+#: src/ActionButtons.js:25
+msgid "or"
+msgstr ""
+
+#: src/ActionButtons.js:32
+msgid "Simple add & redirect"
+msgstr ""
+
+#: src/CardHeader.js:30
+msgid "remove"
+msgstr ""
+
 #: src/DashboardManager.js:426
 msgid "You need to select a path - Coupon URLs"
 msgstr ""
@@ -11,12 +27,48 @@ msgstr ""
 msgid "You need to add one or more actions - Coupon URLs"
 msgstr ""
 
+#: src/Disabled.js:12
+msgid "URL disabled for this coupon"
+msgstr ""
+
+#: src/Disabled.js:18
+msgid "Enable"
+msgstr ""
+
 #: src/Enabled.js:15
 msgid "Enabled"
 msgstr ""
 
 #: src/Enabled.js:16
 msgid "Disable?"
+msgstr ""
+
+#: src/Multiple.js:37
+msgid "Type to search..."
+msgstr ""
+
+#: src/Multiple.js:37
+msgid "Nothing found"
+msgstr ""
+
+#: src/NoActions.js:13
+msgid "No actions!"
+msgstr ""
+
+#: src/NoActions.js:15
+msgid "Add at least one action to perform when this URL is clicked."
+msgstr ""
+
+#: src/QueryParameters.js:14
+msgid "Any Query parameters"
+msgstr ""
+
+#: src/QueryParameters.js:14
+msgid "MUST have these query parameters:"
+msgstr ""
+
+#: src/TipMenu.js:27
+msgid "Actions"
 msgstr ""
 
 #: src/URI.js:59

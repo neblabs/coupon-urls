@@ -23,4 +23,5 @@ jobs:
           php-version-lint-build: '7.4'
           php-version-lint-source: '8.4'
           php-version-tests-end: 'latest'
+          node-version-build: '16'
         
