@@ -31,7 +31,7 @@ return a(
         'app/creators',
         'app/tasks',
         'app/credentials',
-        'app/presentation/components/DashboardDevelopmentScripts',
+        'app/presentation/components/dashboarddevelopmentscripts',
         'app/scripts/dashboard/.git',
         //'app/scripts/dashboard/build/static/css',
         'app/scripts/dashboard/public',

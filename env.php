@@ -14,7 +14,7 @@ return [
     'files' => [
         'plugin' => [
             'in' => 'index.php',
-            'out' => 'coupon-urls.php'
+            'out' => 'coupon-urls.php' # DO NOT change it to coupon-urls-for-woocommerce.php since this is what users have installed and renaming it would make all 100s of sites being uninstalled
         ],
         'readme' => 'readme.md'
     ]
