@@ -8,8 +8,8 @@ return [
         'php' => 7.2
     ],
     'urls' => [
-        'plugin' => '', #todo, shall be couponsplus.app
-        'organization' => '', # todo, shall be neblabs.com
+        'plugin' => '',
+        'organization' => '',
     ],
     'files' => [
         'plugin' => [
