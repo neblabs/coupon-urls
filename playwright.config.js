@@ -8,7 +8,7 @@ const config = defineConfig({
     fullyParallel: true,
     timeout: 90_000,
     use: {
-        baseURL: process.env.WP_BASE_URL || 'http://localhost:8880',
+        baseURL: process.env.WP_BASE_URL || 'http://localhost:8888',
         trace: 'on-first-retry',
         video: 'retain-on-failure',
         channel: 'chrome',
