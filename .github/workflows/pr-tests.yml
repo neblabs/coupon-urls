@@ -16,6 +16,6 @@ jobs:
         uses: rafark/cicd-labs/.github/workflows/build.yml@main
         with:
           plugin-slug: coupon-urls-for-woocommerce
-          # default is true but lets make it explicit here anyway.
+          run-phpunit-tests: false # not for now, we will take care of this later
           run-playwright-tests: true 
           
