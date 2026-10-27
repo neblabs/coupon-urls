@@ -20,7 +20,7 @@ jobs:
           run-playwright-tests: true 
           # env versions
           php-version-build: '8.2'
-          php-version-lint-build: '7.4'
+          php-version-lint-build: '8.4'
           php-version-lint-source: '8.4'
           php-version-tests-end: 'latest'
           node-version-build: '16'
