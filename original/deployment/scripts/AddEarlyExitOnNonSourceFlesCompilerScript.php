@@ -105,15 +105,27 @@ Class AddEarlyExitOnNonSourceFlesCompilerScript extends Script
         FILEDATA;
 
 
-        (string) $pattern = '/namespace\s+\w+/i';//'/(Class|Interface)\s+\w+/i';
+        $file = i($fileData);
+        $namespacePattern = '/namespace\s+\w+/i';
+        $exitStatement = "if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly\n\n";
 
-        if (!i($fileData)->matchesRegEx($pattern)) {
+        // Run on non-namespaced files OR namespaced files that define functions
+        if (!$file->matchesRegEx($namespacePattern) || $file->matchesRegEx('/^\s*function\s+\w+\s*\(/mi')) {
 
-            (object) $replaced = i($fileData)->replaceRegEx($pattern, replacement: '');
-            //dump('replaced', $this->data->target, /*i($fileData)->trim()->trimLeft('<?php')->prepend("<?php if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly")*/);
+            if ($file->matchesRegEx('/namespace\s+[^;]+;/i')) {
+                // Namespaced file: Insert right AFTER the namespace line (before `use` statements)
+                $result = $file->replaceRegEx(
+                    '/^(namespace\s+[^;]+;\s*)/mi',
+                    fn(array $matches) => $matches[1] . "\n" . $exitStatement
+                );
+            } else {
+                // Non-namespaced file: Insert right after <?php
+                $result = $file->trim()->trimLeft('<?php')->prepend("<?php\n\n" . $exitStatement);
+            }
+
             file_put_contents(
-                filename: $this->data->target, 
-                data: i($fileData)->trim()->trimLeft('<?php')->prepend("<?php if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly\n\n"),
+                filename: $this->data->target,
+                data: (string) $result
             );
         }
     }
