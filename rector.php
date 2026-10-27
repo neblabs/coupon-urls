@@ -21,7 +21,7 @@ return static function (RectorConfig $rectorConfig): void {
         './tests/**/*',
         './bin/**/*',
         './storage/**/*',
-        './coupon-urls.php'
+        './index.php'
     ]);
 
 };

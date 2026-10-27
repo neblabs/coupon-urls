@@ -175,7 +175,7 @@ return a(
             new AddEarlyExitOnNonSourceFilesTransformer,
             new WithExcludedFiles(new ArryToArrayTransformer, _(
                 'utilities/collection/collection.php',
-                'coupon-urls.php'
+                'index.php'
             )),   
         ),
         beforeClone: [
@@ -192,11 +192,11 @@ return a(
             CustomToWordPressTranslationFunctionCompilerScript::class,
             ArryToArrayCompilerScript::withFilesToExclude([
                 'utilities/collection/collection.php',
-                'coupon-urls.php'
+                'index.php'
             ]),
             _ToNewCollectionCompilerScript::withFilesToExclude([
                 'utilities/collection/collection.php',
-                'coupon-urls.php'
+                'index.php'
             ]),
             NamedArgumentCollectionCallsToAssociativeArrayCallsCompilerScript::class,
             TransformGlobalFunctionWrapperIntoDirectFunctionCallCompilerScript::class,
@@ -205,11 +205,11 @@ return a(
             /*
             ArryToArrayCompilerScript::withFilesToExclude([
                 'utilities/collection/collection.php',
-                'coupon-urls.php'
+                'index.php'
             ]),
             _ToNewCollectionCompilerScript::withFilesToExclude([
                 'utilities/collection/collection.php',
-                'coupon-urls.php'
+                'index.php'
             ]),
             NamedArgumentCollectionCallsToAssociativeArrayCallsCompilerScript::class,
             TransformGlobalFunctionWrapperIntoDirectFunctionCallCompilerScript::class,*/
