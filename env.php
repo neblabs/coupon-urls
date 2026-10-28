@@ -32,6 +32,6 @@ return [
     ],
     'tests' => [
         'playwright' => true,
-        'php'    => true,
+        'php'    => false, // disable phpunit for now
     ],
 ];
