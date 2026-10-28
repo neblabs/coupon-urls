@@ -1,0 +1,15 @@
+name: Scheduled Preview Branches Cleanup
+
+on:
+  schedule:
+    - cron: '0 0 * * *'
+  workflow_dispatch:
+
+jobs:
+  cleanup:
+    permissions:
+      contents: write
+    uses: rafark/cicd-labs/.github/workflows/clean-up-preview-branches.yml@main
+    with:
+      days_old: '1'
+      branch_regex: '^build-preview-pr-.*'
