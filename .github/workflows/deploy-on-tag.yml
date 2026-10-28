@@ -1,0 +1,19 @@
+name: Build and deploy to wp.org on new tag
+
+on:
+  push:
+    tags:
+      - v*
+
+permissions:
+    contents: write
+    pull-requests: write
+    actions: write # required for cancellations
+
+jobs:
+  call_deploy_workflow:
+    uses: rafark/cicd-labs/.github/workflows/deploy.yml@main
+    with:
+      version: ${{ github.ref_name }}
+    secrets: inherit
+
