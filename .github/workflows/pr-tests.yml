@@ -14,13 +14,3 @@ permissions:
 jobs:
     call_smoke_tests_workflow:
         uses: rafark/cicd-labs/.github/workflows/build.yml@main
-        with:
-          run-phpunit-tests: false # not for now, we will take care of this later
-          run-playwright-tests: true 
-          # env versions
-          php-version-build: '8.2'
-          php-version-lint-build: '8.4'
-          php-version-lint-source: '8.4'
-          php-version-tests-end: 'latest'
-          node-version-build: '16'
-        
