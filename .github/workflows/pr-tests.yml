@@ -15,7 +15,6 @@ jobs:
     call_smoke_tests_workflow:
         uses: rafark/cicd-labs/.github/workflows/build.yml@main
         with:
-          plugin-slug: coupon-urls-for-woocommerce
           run-phpunit-tests: false # not for now, we will take care of this later
           run-playwright-tests: true 
           # env versions
